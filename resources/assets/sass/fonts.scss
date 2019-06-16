@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'Cuprum Regular';
+  src: url('../fonts/Cuprum-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+$font-cuprum_regular: "Cuprum Regular";
+
+@font-face {
+    font-family: 'Cuprum Bold';
+    src: url('../fonts/Cuprum-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+$font-cuprum_bold: "Cuprum Bold";
+
+@font-face {
+    font-family: 'Core Sans D 37 Cn Regular';
+    src: url('../fonts/CoreSansD37CnRegular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+$font-coresans_regular: "Core Sans D 37 Cn Regular";

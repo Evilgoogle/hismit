@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Host: ssmedical.kz
+Sitemap: http://ssmedical.kz/sitemap.xml

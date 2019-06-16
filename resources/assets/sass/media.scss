@@ -1,0 +1,196 @@
+// Media points
+$w-1900: 1900px;
+$w-1850: 1850px;
+$w-1800: 1800px;
+$w-1750: 1750px;
+$w-1700: 1700px;
+$w-1650: 1650px;
+$w-1600: 1600px;
+$w-1550: 1550px;
+$w-1500: 1500px;
+$w-1450: 1450px;
+$w-1400: 1400px;
+$w-1350: 1350px;
+$w-1300: 1300px;
+$w-1250: 1250px;
+$w-1200: 1200px;
+$w-1100: 1100px;
+$w-1024: 1024px;
+$w-1023: 1023px;
+$w-1000: 1000px;
+$w-900: 900px;
+$w-840: 840px;
+$w-800: 800px;
+$w-767: 767px;
+$w-640: 640px;
+$w-550: 550px;
+$w-480: 480px;
+$w-450: 450px;
+$w-420: 420px;
+$w-400: 400px;
+$w-375: 375px;
+$w-350: 350px;
+$w-320: 320px;
+
+@mixin respond-to($media) {
+    @if ($media == w-320) {
+        @media only screen and (max-width: $w-320) {
+            @content;
+        }
+    }
+    @if ($media == w-350) {
+        @media only screen and (max-width: $w-350) {
+            @content;
+        }
+    }
+    @if ($media == w-375) {
+        @media only screen and (max-width: $w-375) {
+            @content;
+        }
+    }
+    @if ($media == w-400) {
+        @media only screen and (max-width: $w-400) {
+            @content;
+        }
+    }
+    @if ($media == w-420) {
+        @media only screen and (max-width: $w-420) {
+            @content;
+        }
+    }
+    @if ($media == w-450) {
+        @media only screen and (max-width: $w-450) {
+            @content;
+        }
+    }
+    @if ($media == w-480) {
+        @media only screen and (max-width: $w-480) {
+            @content;
+        }
+    }
+    @if ($media == w-550) {
+        @media only screen and (max-width: $w-550) {
+            @content;
+        }
+    }
+    @if ($media == w-640) {
+        @media only screen and (max-width: $w-640) {
+            @content;
+        }
+    }
+    @else if($media == w-767) {
+        @media only screen and (max-width: $w-767) {
+            @content;
+        }
+    }
+    @else if($media == w-800) {
+        @media only screen and (max-width: $w-800) {
+            @content;
+        }
+    }
+    @else if($media == w-840) {
+        @media only screen and (max-width: $w-840) {
+            @content;
+        }
+    }
+    @else if($media == w-900) {
+        @media only screen and (max-width: $w-900) {
+            @content;
+        }
+    }
+    @else if($media == w-1000) {
+        @media only screen and (max-width: $w-1000) {
+            @content;
+        }
+    }
+    @else if($media == w-1023) {
+        @media only screen and (max-width: $w-1023) {
+            @content;
+        }
+    }
+    @else if($media == w-1024) {
+        @media only screen and (max-width: $w-1024) {
+            @content;
+        }
+    }
+    @else if($media == w-1100) {
+        @media only screen and (max-width: $w-1100) {
+            @content;
+        }
+    }
+    @else if($media == w-1200) {
+        @media only screen and (max-width: $w-1200) {
+            @content;
+        }
+    }
+    @else if($media == w-1250) {
+        @media only screen and (max-width: $w-1250) {
+            @content;
+        }
+    }
+    @else if($media == w-1300) {
+        @media only screen and (max-width: $w-1300) {
+            @content;
+        }
+    }
+    @else if($media == w-1350) {
+        @media only screen and (max-width: $w-1350) {
+            @content;
+        }
+    }
+    @else if($media == w-1400) {
+        @media only screen and (max-width: $w-1400) {
+            @content;
+        }
+    }
+    @else if($media == w-1450) {
+        @media only screen and (max-width: $w-1450) {
+            @content;
+        }
+    }
+    @else if($media == w-1500) {
+        @media only screen and (max-width: $w-1500) {
+            @content;
+        }
+    }
+    @else if($media == w-1550) {
+        @media only screen and (max-width: $w-1550) {
+            @content;
+        }
+    }
+    @else if($media == w-1600) {
+        @media only screen and (max-width: $w-1600) {
+            @content;
+        }
+    }
+    @else if($media == w-1650) {
+        @media only screen and (max-width: $w-1650) {
+            @content;
+        }
+    }
+    @else if($media == w-1700) {
+        @media only screen and (max-width: $w-1700) {
+            @content;
+        }
+    }
+    @else if($media == w-1750) {
+        @media only screen and (max-width: $w-1750) {
+            @content;
+        }
+    }
+    @else if($media == w-1800) {
+        @media only screen and (max-width: $w-1800) {
+            @content;
+        }
+    }
+    @else if($media == w-1850) {
+        @media only screen and (max-width: $w-1850) {
+            @content;
+        }
+    }
+    @else if($media == w-1900) {
+        @media only screen and (max-width: $w-1900) {
+            @content;
+        }
+    }
+}
