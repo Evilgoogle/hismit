@@ -32,6 +32,31 @@ Route::group(['middleware' => 'web'], function () {
             Route::get('remove/{id}', 'SeoController@remove');
         });
 
+        Route::group(['prefix' => 'language'], function () {
+            Route::get('', 'LangController@index');
+            Route::get('add', 'LangController@add');
+            Route::get('edit/{id}', 'LangController@edit');
+            Route::post('insert/{id?}', 'LangController@insert');
+            Route::get('remove/{id}', 'LangController@remove');
+            Route::post('change-position', 'LangController@changePosition');
+            Route::post('remove-image', 'LangController@removeImage');
+            Route::post('enable', 'LangController@enable');
+            Route::post('default_lang', 'LangController@default_lang');
+        });
+
+        Route::group(['prefix' => 'language_interface'], function () {
+            Route::get('', 'LangInterfaceController@index');
+            if(config('myconfig.language_developer')) {
+                Route::get('add', 'LangInterfaceController@add');
+            }
+            Route::get('edit/{id}', 'LangInterfaceController@edit');
+            Route::post('insert/{id?}', 'LangInterfaceController@insert');
+            if(config('myconfig.language_developer')) {
+                Route::get('remove/{id}', 'LangInterfaceController@remove');
+            }
+            Route::post('change-position', 'LangInterfaceController@changePosition');
+        });
+
         Route::group(['prefix' => 'block'], function () {
             Route::get('', 'BlockController@index');
             Route::get('add', 'BlockController@add');

@@ -16,7 +16,7 @@ class Processing
 {
     public $result;
 
-    public function __construct($id = null, $modelName, $request, $requestNew, $fileClass, $bools, $files, $upload_url) {
+    public function __construct($id = null, $modelName, $request, $requestNew, $fileClass, $bools, $files, $upload_url, $url_id) {
         $item = eval('return new \\App\\'. $modelName .';');
         $tableName = $item->getTable();
         if (Schema::hasTable($tableName)) {
@@ -109,7 +109,10 @@ class Processing
                                         $lang = LangDb::getInstance();
                                         $lang->get();
                                         if($lang->default_lang == $language) {
-                                            $item->url = Transliteration::make($setTitle, ['type' => 'url', 'lowercase' => true]) .'-'. $item->id;
+                                            if ($url_id == true)
+                                                $item->url = Transliteration::make($setTitle, ['type' => 'url', 'lowercase' => true]) .'-'. $item->id;
+                                            else
+                                                $item->url = Transliteration::make($setTitle, ['type' => 'url', 'lowercase' => true]);
                                         }
                                     }
                                 }

@@ -40,26 +40,7 @@ class setTemplate
 
         if(config('emotions.language_switch') === false) {
 
-            echo '
-               <h2 class="card-inside-title">'.$this->sets['label'].'</h2>
-                <div class="row clearfix">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <div class="form-line">
-                                <input
-                                    class="form-control"
-                                    type="text"
-                                    id="'.$this->sets['name'].'"
-                                    name="'.$this->sets['name'].'"
-                                    placeholder="'.$this->sets['label'].'"
-                                    value="'.htmlspecialchars($this->item).'"
-                                    '.$this->required.'
-                                >
-                            </div>
-                        </div>
-                    </div>
-                </div> 
-            ';
+            echo 'вызовите include()';
 
         } elseif(config('emotions.language_switch') === true) {
 
@@ -73,18 +54,20 @@ class setTemplate
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <div class="form-line">
+
                                     <!-- Проверка type. По переданному значению подключается нужный шаблон -->
-                                    <?php if(isset($this->sets['type'])) {
-                                        if($this->sets['type'] == 'input') {?>
+                                    <?php if(isset($this->sets['input_type'])) {
+                                        if($this->sets['input_type'] == 'input') {?>
 
                                             <input
                                                 class="form-control"
-                                                type="text"
+                                                type="<?php echo isset($this->sets['type']) ? $this->sets['type'] : 'text' ?>"
                                                 name="<?php echo $this->sets['name'].'[set_lang]['.$value->url.']' ?>"
                                                 placeholder="<?php echo $this->sets['label'] ?>"
-                                                value="<?php echo isset($this->item->set_lang->$url) ? htmlspecialchars($this->item->set_lang->$url) : '' ?>" <?php if($lang->default_lang == $value->url) { echo $this->required; } ?>>
+                                                value="<?php echo isset($this->item->set_lang->$url) ? htmlspecialchars($this->item->set_lang->$url) : '' ?>"
+                                                <?php if($lang->default_lang == $value->url) { echo $this->required; } ?>>
 
-                                        <?php } elseif ($this->sets['type'] == 'textarea') {?>
+                                        <?php } elseif ($this->sets['input_type'] == 'textarea') {?>
 
                                             <textarea
                                                 class="form-control <?php echo isset($this->sets['editor']) && $this->sets['editor'] ? 'text-editor' : '' ?><?php echo isset($this->sets['editor_type']) && $this->sets['editor_type'] ? '-'.$this->sets['editor_type'] : '' ?>"
@@ -97,6 +80,7 @@ class setTemplate
 
                                         <?php }
                                     } ?>
+
                                 </div>
                             </div>
                         </div>
