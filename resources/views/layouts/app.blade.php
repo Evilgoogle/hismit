@@ -12,20 +12,23 @@
     </script>
 
     <?php
-    if (isset($seo_new)) $seo = $seo_new;
+      if (isset($seo_new)) $seo = $seo_new;
     ?>
-    <title>{{ isset($seo) && !empty($seo->title) ? $seo->title : config('app.name') }}</title>
+    <title>{{ isset($title) ? $title : config('app.name') }}</title>
+    <meta name="description" content="{{ $description ?? '' }}">
+    <meta property="og:title" content="{{ isset($title) ? $title : config('app.name') }}">
+    <meta property="og:description" content="{{ $description ?? '' }}">
+    <meta property="og:url" content="{{ url()->current() }}/" />
+    <meta property="og:image" content="/public/images/logo_bill.png">
+    <meta property="og:image:url" content="{{ $seo->image ?? '' }}" />
+    <meta property="og:image:width" content="{{ $seo->image_width ?? '' }}" />
+    <meta property="og:image:height" content="{{ $seo->image_height ?? '' }}" />
+    <meta property="og:image:type" content="{{ $seo->image_mime ?? '' }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content="{{ config('app.name') }}" />
 
-    <meta name="apple-mobile-web-app-title" content="{{ $seo->title ?? config('app.name') }}">
-    <meta name="description" content="{{ $seo->description ?? '' }}">
-    <meta name="keywords" content="{{ $seo->keywords ?? '' }}">
-    <meta name="author" content="Emotions Group">
-    <meta name="robots" content="index, follow">
-
-    <meta property="og:title" content="{{ $seo->title ?? config('app.name') }}">
-    <meta property="og:description" content="{{ $seo->description ?? '' }}">
-    <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:type" content="website">
+    <link rel="canonical" href="{{ strtolower(url()->current()) }}/">
 </head>
 <body>
 

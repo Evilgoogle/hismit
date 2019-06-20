@@ -62,6 +62,7 @@ if(!function_exists('lang_filter')) {
     }
 }
 
+// для админки
 if(!function_exists('langFilter')) {
     /*
      | langFilter - вытаскивает значение из JSON массива запися по языку что идет по умолчанию или по языку что был выбран.
@@ -78,11 +79,11 @@ if(!function_exists('langFilter')) {
             foreach ($array as $is_lang=>$langs) {
                 foreach ($langs as $lang=>$item) {
                     if ($lang == $get_lang->switch_lang) {
-//                        if (!empty($item))
-                        return $item;
-                        /*                        else {
-                                                    return $langs->$def_lang;
-                                                }*/
+                        if (!empty($item))
+                            return $item;
+                        else {
+                            return $langs->$def_lang;
+                        }
                     }
                 }
             }
@@ -124,7 +125,7 @@ if(!function_exists('getActiveLang')) {
     function getActiveLang() {
         $lang = \App\EmotionsGroup\Language\LangDb::getInstance();
         $lang->get();
-        $item = La::where('url', $lang->switch_lang)->first();
+        $item = \App\Language::where('url', $lang->switch_lang)->first();
         return $item->title;
     }
 }
