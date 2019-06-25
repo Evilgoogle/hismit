@@ -28,10 +28,10 @@
         @endforeach
     @else
         <input
-                class="form-control"
-                type="text"
-                name="data"
-                value="<?php (empty($item)) ? '' : $item?>"
+            class="form-control"
+            type="text"
+            name="data"
+            value="<?php (empty($item)) ? '' : $item?>"
         >
     @endif
 </div>

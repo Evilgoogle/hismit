@@ -136,7 +136,7 @@ class Ontomany
             if (in_array('position', $tableColumns) || in_array('url', $tableColumns)) {
                 if (in_array('url', $tableColumns) && !in_array('url', (array)$requestNew)) {
                     if (in_array('title', $tableColumns) && empty($item->url)) {
-                        $item->url = Transliteration::make($requestNew->title, ['type' => 'url', 'lowercase' => true]) .'-'. $item->id;
+                        $item->url = Transliteration::make(strip_tags($requestNew->title), ['type' => 'url', 'lowercase' => true]) .'-'. $item->id;
                     }
                 }
 

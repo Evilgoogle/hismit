@@ -36,7 +36,7 @@ class LangDb {
 
         if (Schema::hasTable('languages'))
         {
-            $this->lang = Language::all();
+            $this->lang = Language::orderBy('position', 'asc')->get();
         }
     }
 

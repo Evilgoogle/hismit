@@ -19,7 +19,7 @@
                                 {{--<th class="index">Порядок сортировки</th>--}}
                                 <th>ID</th>
                                 <th>Ключ</th>
-                                <th>Название</th>
+                                {{--<th>Название</th>--}}
                                 <th>Опции</th>
                             </tr>
                         </thead>
@@ -29,7 +29,7 @@
                                     {{--<td class="index">{{ $item->position }}</td>--}}
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->key }}</td>
-                                    <td>{{ $item->name }}</td>
+                                    {{--<td>{{ $item->name }}</td>--}}
                                     <td>
                                         <a href="/admin/{{ $info->url }}/edit/{{ $item->id }}">Изменить</a>
                                         @if($control)

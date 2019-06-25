@@ -14,12 +14,12 @@
                     <form action="/admin/{{ $info->url }}/insert{{ isset($item->id) ? '/'. $item->id : '' }}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
-                        @include('admin._input.input-text', [
+{{--                        @include('admin._input.input-text', [
                             'name' => 'name',
                             'label' => 'Название',
                             'item' => isset($item) ? $item : '',
                             'required' => true
-                        ])
+                        ])--}}
 
                         @include('admin._input.input-text', [
                             'name' => 'key',
@@ -28,7 +28,7 @@
                             'required' => true
                         ])
 
-                        @include('admin._input.inputs-lang', [
+                        @include('admin._input.textareas-lang', [
                             'allLang' => $allLang,
                             'item' => isset($item) ? $item : ''
                         ])

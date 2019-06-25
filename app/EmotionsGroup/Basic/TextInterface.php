@@ -44,9 +44,9 @@ class TextInterface
         foreach ($this->texts as $text) {
             if($text->key == $get) {
                  if(isJSON($text->data)) {
-                     return langFilter($text->data);
+                     return langFilter(html_entity_decode($text->data));
                  } else {
-                     return $text->data;
+                     return html_entity_decode($text->data);
                 }
             }
         }

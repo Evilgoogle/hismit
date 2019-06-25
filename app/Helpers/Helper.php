@@ -29,6 +29,7 @@ if(!function_exists('isJSON')) {
     }
 }
 
+// для админки
 if(!function_exists('lang_filter')) {
     /**
      * lang_filter - проверяет не является ли данная json массивом,
@@ -62,7 +63,6 @@ if(!function_exists('lang_filter')) {
     }
 }
 
-// для админки
 if(!function_exists('langFilter')) {
     /*
      | langFilter - вытаскивает значение из JSON массива запися по языку что идет по умолчанию или по языку что был выбран.

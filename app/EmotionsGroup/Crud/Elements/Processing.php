@@ -110,16 +110,16 @@ class Processing
                                         $lang->get();
                                         if($lang->default_lang == $language) {
                                             if ($url_id == true)
-                                                $item->url = Transliteration::make($setTitle, ['type' => 'url', 'lowercase' => true]) .'-'. $item->id;
+                                                $item->url = Transliteration::make(strip_tags($setTitle), ['type' => 'url', 'lowercase' => true]) .'-'. $item->id;
                                             else
-                                                $item->url = Transliteration::make($setTitle, ['type' => 'url', 'lowercase' => true]);
+                                                $item->url = Transliteration::make(strip_tags($setTitle), ['type' => 'url', 'lowercase' => true]);
                                         }
                                     }
                                 }
                             }
 
                         } else {
-                            $item->url = Transliteration::make($requestNew->title, ['type' => 'url', 'lowercase' => true]) .'-'. $item->id;
+                            $item->url = Transliteration::make(strip_tags($requestNew->title), ['type' => 'url', 'lowercase' => true]) .'-'. $item->id;
                         }
                     }
                 }

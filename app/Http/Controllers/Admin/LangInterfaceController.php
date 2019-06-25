@@ -37,21 +37,21 @@ class LangInterfaceController extends Controller
         $info = $this->info;
         $control = $this->control;
 
-        return view('admin.languageInterface.index', compact(['items', 'info', 'control']));
+        return view('admin.language-interface.index', compact(['items', 'info', 'control']));
     }
 
     public function add() {
 
         $info = $this->info;
-        $allLang = Language::all();
+        $allLang = Language::orderBy('position', 'asc')->get();
 
-        return view('admin.languageInterface.insert', compact(['info', 'allLang']));
+        return view('admin.language-interface.insert', compact(['info', 'allLang']));
     }
 
     public function edit($id)
     {
         $info = $this->info;
-        $allLang = Language::all();
+        $allLang = Language::orderBy('position', 'asc')->get();
 
         try {
             $item = LanguageInterface::findOrFail($id);
@@ -59,15 +59,15 @@ class LangInterfaceController extends Controller
             return back()->withErrors($e->getMessage());
         }
 
-        return view('admin.languageInterface.insert', compact(['item', 'info', 'allLang']));
+        return view('admin.language-interface.insert', compact(['item', 'info', 'allLang']));
     }
 
     public function insert(Request $request, $id = null)
     {
-        $pattern = '#^[a-zA-z\_\-]*$#';
+//        $pattern = '#^[a-zA-zа-яА-Я0-9\_\-]*$#';
         $rules = [
-            'name' => 'required',
-            'key' => 'required|regex:'.$pattern
+//            'name' => 'required',
+            'key' => 'required'/*|regex:'.$pattern*/
         ];
 
         $v = Validator::make($request->all(), $rules);
