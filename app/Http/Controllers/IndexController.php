@@ -12,7 +12,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        return view('app.pages.index', compact());
+        return view('app.pages.index', compact(''));
     }
 
     public function news($url = null)
