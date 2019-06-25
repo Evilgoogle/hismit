@@ -27,8 +27,8 @@
                             'item' => isset($item) ? $item : '',
                             'required' => true
                         ])
-
-                        @include('admin._input.textareas-lang', [
+                        
+                        @include('admin._input.inputs-lang', [
                             'allLang' => $allLang,
                             'item' => isset($item) ? $item : ''
                         ])
