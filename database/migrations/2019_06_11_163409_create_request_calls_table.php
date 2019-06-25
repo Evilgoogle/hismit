@@ -15,9 +15,9 @@ class CreateRequestCallsTable extends Migration
     {
         Schema::create('request_calls', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->nullable();
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
+            $table->text('name')->nullable();
+            $table->text('email')->nullable();
+            $table->text('phone')->nullable();
             $table->text('message')->nullable();
             $table->timestamps();
         });
