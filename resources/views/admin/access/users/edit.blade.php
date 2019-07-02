@@ -35,6 +35,30 @@
                             </div>
                         </div>
                     </div>
+{{--                    <div class="row clearfix">
+                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                            <label for="password">Пароль</label>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="Пароль">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                            <label for="password_confirmation">Повторите пароль</label>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" placeholder="Повторите пароль">
+                                </div>
+                            </div>
+                        </div>
+                    </div>--}}
                     <div class="row clearfix">
                         <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                             <label for="role">Роли *</label>

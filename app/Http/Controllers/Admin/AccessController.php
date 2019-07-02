@@ -9,8 +9,6 @@ use App\RoleUser;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Input;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 
@@ -45,7 +43,8 @@ class AccessController extends Controller
     {
         $rules = [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users'
+            'email' => 'required|email|max:255|unique:users',
+//            'password' => 'required|min:6|confirmed',
         ];
 
         $v = Validator::make($request->all(), $rules);
@@ -61,10 +60,8 @@ class AccessController extends Controller
 
         $user->attachRole(Role::where('name', 'login')->first());
 
-        if (Input::has('role'))
-        {
-            foreach ($request->role as $key => $value)
-            {
+        if ($request->has('role')) {
+            foreach ($request->role as $key => $value) {
                 $user->attachRole($value);
             }
         }
@@ -73,11 +70,11 @@ class AccessController extends Controller
         $data['email'] = $user->email;
         $data['password'] = $password;
 
-//            Mail::send('admin.access.email_welcome', ['data' => $data], function($message) use ($data){
-//                $message->from('irolik90@gmail.com', 'B1NK Administrator');
-//                $message->subject('Добро пожаловать');
-//                $message->to($data['email']);
-//            });
+        Mail::send('admin.access.email_welcome', ['data' => $data], function($message) use ($data){
+            $message->from('zhetisu@spk-zhetisu.kz', 'АО «РИР «СПК «Жетісу»');
+            $message->subject('Вам предоставлен доступ');
+            $message->to($data['email']);
+        });
 
         return redirect('/admin/access')->with('message', 'Пользователь добавлен');
     }
@@ -95,6 +92,7 @@ class AccessController extends Controller
     {
         $rules = [
             'name' => 'required|max:255',
+//            'password' => 'min:6|confirmed',
         ];
 
         $v = Validator::make($request->all(), $rules);
@@ -103,16 +101,17 @@ class AccessController extends Controller
 
         $user = User::findOrFail($id);
         $user->name = $request->name;
+        if($request->has('password')) {
+            $user->password = bcrypt($request->password);
+        }
         $user->save();
 
         RoleUser::removeUser($id);
 
         $user->attachRole(Role::where('name', 'login')->first());
 
-        if (Input::has('role'))
-        {
-            foreach ($request->role as $key => $value)
-            {
+        if ($request->has('role')) {
+            foreach ($request->role as $key => $value) {
                 $user->attachRole($value);
             }
         }
@@ -148,7 +147,7 @@ class AccessController extends Controller
         $rules = [
             'name' => 'required|max:255',
             'display_name' => 'required|max:255',
-            'description' => 'required',
+            'description' => 'required'
         ];
 
         $v = Validator::make($request->all(), $rules);
@@ -157,7 +156,7 @@ class AccessController extends Controller
 
         $role = Role::create($request->except(['permission','_token']));
 
-        if (Input::has('permission')){
+        if ($request->has('permission')){
             foreach ($request->permission as $key => $value){
                 $role->attachPermission($value);
             }
@@ -180,7 +179,7 @@ class AccessController extends Controller
         $rules = [
             'name' => 'required|max:255',
             'display_name' => 'required|max:255',
-            'description' => 'required',
+            'description' => 'required'
         ];
 
         $v = Validator::make($request->all(), $rules);
@@ -193,12 +192,12 @@ class AccessController extends Controller
         $role->description = trim($request->description);
         $role->save();
 
-        RolePermission::removeRoles($id);
+/*        RolePermission::removeRoles($id);
 
         foreach ($request->permission as $key => $value)
         {
             $role->attachPermission($value);
-        }
+        }*/
 
         return redirect('/admin/access')->with('message', 'Роль обновлена');
     }
@@ -220,7 +219,7 @@ class AccessController extends Controller
      * Permissions begin
      * */
 
-    public function addPermission()
+/*    public function addPermission()
     {
         return view('admin.access.permissions.add');
     }
@@ -275,7 +274,7 @@ class AccessController extends Controller
         Permission::destroy($id);
 
         return redirect('/admin/access')->with('message', 'Действие удалено');
-    }
+    }*/
 
     /*
      * Permissions end

@@ -15,7 +15,8 @@ $('.js-table').each(function (key, index) {
         // bPaginate: false,
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
+        ],
+        destroy: true
     });
 
     if (typeof $this.data('order-column') !== 'undefined' && typeof $this.data('order-type') !== 'undefined') {

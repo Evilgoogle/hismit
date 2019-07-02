@@ -64,7 +64,7 @@
                             <td>{{ $role->description }}</td>
                             <td>
                                 <a href="/admin/access/roles/edit/{{ $role->id }}">Изменить</a>
-                                {!! (($role->name == 'superadmin') || ($role->name == 'login')) ? '' : '<a href="/admin/access/roles/remove/{{ $role->id }}">Удалить</a>' !!}
+                                {!! (($role->name == 'superadmin') || ($role->name == 'login')) ? '' : '<a href="/admin/access/roles/remove/'. $role->id .'">Удалить</a>' !!}
                             </td>
                         </tr>
                     @empty
@@ -79,7 +79,7 @@
     </div>
 </div>
 
-<div class="row clearfix">
+{{--<div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="header">
@@ -117,6 +117,6 @@
             </div>
         </div>
     </div>
-</div>
+</div>--}}
 
 @stop

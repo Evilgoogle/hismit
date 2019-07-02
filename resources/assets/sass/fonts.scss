@@ -1,23 +1,23 @@
 @font-face {
-  font-family: 'Cuprum Regular';
-  src: url('../fonts/Cuprum-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-$font-cuprum_regular: "Cuprum Regular";
-
-@font-face {
-    font-family: 'Cuprum Bold';
-    src: url('../fonts/Cuprum-Bold.ttf') format('truetype');
+    font-family: 'RobotoCondensed Regular';
+    src: url('../fonts/RobotoCondensed-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
-$font-cuprum_bold: "Cuprum Bold";
+$font-robcond-regular: "RobotoCondensed Regular";
 
 @font-face {
-    font-family: 'Core Sans D 37 Cn Regular';
-    src: url('../fonts/CoreSansD37CnRegular.otf') format('opentype');
+    font-family: 'RobotoCondensed Light';
+    src: url('../fonts/RobotoCondensed-Light.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
-$font-coresans_regular: "Core Sans D 37 Cn Regular";
+$font-robcond-light: "RobotoCondensed Light";
+
+@font-face {
+    font-family: 'RobotoCondensed Bold';
+    src: url('../fonts/RobotoCondensed-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+$font-robcond-bold: "RobotoCondensed Bold";

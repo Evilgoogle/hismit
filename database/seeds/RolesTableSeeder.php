@@ -20,7 +20,7 @@ class RolesTableSeeder extends Seeder
             ],
             [
                 'name' => 'login',
-                'display_name' => 'Логин',
+                'display_name' => 'Пользователь',
                 'description' => 'Добавленный пользователь, имеет доступ только к личному кабинету. Роль присваивается автоматически.'
             ],
         ];

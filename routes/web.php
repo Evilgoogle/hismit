@@ -14,6 +14,34 @@ Route::group(['middleware' => 'web'], function () {
             Route::post('update-password', 'ProfileController@updatePassword');
         });
 
+        Route::group(['prefix' => 'access', 'middleware' => ['role:superadmin']], function () {
+            Route::get('', 'AccessController@index');
+
+            Route::group(['prefix' => 'users'], function () {
+                Route::get('add', 'AccessController@addUser');
+                Route::post('create', 'AccessController@createUser');
+                Route::get('edit/{id}', 'AccessController@editUser');
+                Route::post('update/{id}', 'AccessController@updateUser');
+                Route::get('remove/{id}', 'AccessController@removeUser');
+            });
+
+            Route::group(['prefix' => 'roles'], function () {
+                Route::get('add', 'AccessController@addRole');
+                Route::post('create', 'AccessController@createRole');
+                Route::get('edit/{id}', 'AccessController@editRole');
+                Route::post('update/{id}', 'AccessController@updateRole');
+                Route::get('remove/{id}', 'AccessController@removeRole');
+            });
+
+            Route::group(['prefix' => 'permissions'], function () {
+                Route::get('add', 'AccessController@addPermission');
+                Route::post('create', 'AccessController@createPermission');
+                Route::get('edit/{id}', 'AccessController@editPermission');
+                Route::post('update/{id}', 'AccessController@updatePermission');
+                Route::get('remove/{id}', 'AccessController@removePermission');
+            });
+        });
+
         Route::group(['prefix' => 'param'], function () {
             Route::post('add-param', 'AdminController@addParam');
         });
@@ -85,7 +113,41 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('request', 'ServiceController@request');
     Route::get('sitemap.xml', 'ServiceController@sitemap');
 
-    Route::group(['prefix' => ''], function () {
+    /**
+     * Этот код занимается установкой языка в свойства switch_lang класса LangDb
+     * А также затрагивает роутинг с учетом языков
+     */
+    $get_allLanguage = \App\EmotionsGroup\Language\LangDb::getInstance();
+    $language = $get_allLanguage->get();
+    // Устанавливаю в переключатель язык по умолчанию. Эта переменная пойдет в роутинг, если чел не переключил язык в ручную.
+    // А если переключил, то она переопределяется на переключенный язык в коде ниже
+    $get_allLanguage->switch_lang = $get_allLanguage->default_lang;
+    $urls = [];
+    foreach ($language as $lang) {
+        $urls[] = $lang->url;
+    }
+
+    //Установка языка на переключатель
+    $patch = Request::segment(1);
+    if(in_array($patch, $urls)) {
+        $get_allLanguage->switch_lang = $patch;
+    }
+
+    //Настроика для роутинга
+    if($get_allLanguage->switch_lang == $get_allLanguage->default_lang) {
+        //Проверка не был ли этот язык выбран в ручную
+        if($get_allLanguage->switch_lang == $patch) {
+            $routing = $get_allLanguage->switch_lang;
+        } else {
+            $routing = '';
+        }
+    } else {
+        $routing = $get_allLanguage->switch_lang;
+    }
+    $_ENV['default_lang'] = $get_allLanguage->default_lang;
+    $_ENV['routing'] = $routing;
+
+    Route::group(['prefix' => $routing], function () {
         Route::get('', 'IndexController@index');
         Route::get('news/{url?}', 'IndexController@news')->name('news.show');
     });

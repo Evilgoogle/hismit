@@ -47,7 +47,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row clearfix">
+{{--                    <div class="row clearfix">
                         <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                             <label for="permission">Доступы *</label>
                         </div>
@@ -62,7 +62,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>--}}
                     <div class="row clearfix">
                         <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
                             <button type="submit" class="btn btn-primary m-t-10 waves-effect">Изменить</button>
