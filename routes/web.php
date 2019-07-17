@@ -74,12 +74,12 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::group(['prefix' => 'language_interface'], function () {
             Route::get('', 'LangInterfaceController@index');
-            if(config('myconfig.language_developer')) {
+            if(config('emotions.language_developer')) {
                 Route::get('add', 'LangInterfaceController@add');
             }
             Route::get('edit/{id}', 'LangInterfaceController@edit');
             Route::post('insert/{id?}', 'LangInterfaceController@insert');
-            if(config('myconfig.language_developer')) {
+            if(config('emotions.language_developer')) {
                 Route::get('remove/{id}', 'LangInterfaceController@remove');
             }
             Route::post('change-position', 'LangInterfaceController@changePosition');
