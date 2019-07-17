@@ -20,7 +20,6 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('123456')
         ]);
 
-        $user->attachRole(Role::where('name', 'login')->first());
         $user->attachRole(Role::where('name', 'superadmin')->first());
     }
 }

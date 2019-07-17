@@ -69,16 +69,20 @@ if(!function_exists('langFilter')) {
      | @param $item
      | @return mixed
      */
-    function langFilter($array) {
+    function langFilter($array, $lang = null) {
         $get_lang = \App\EmotionsGroup\Language\LangDb::getInstance();
         $get_lang->get();
 
         $def_lang = $get_lang->default_lang;
+
+        if (!empty($lang) && !is_null($lang))
+            $get_lang->switch_lang = $lang;
+
         if (isJSON($array)) {
             $array = json_decode($array);
             foreach ($array as $is_lang=>$langs) {
                 foreach ($langs as $lang=>$item) {
-                    if ($lang == $get_lang->switch_lang) {
+                    if($lang == $get_lang->switch_lang) {
                         if (!empty($item))
                             return $item;
                         else {
