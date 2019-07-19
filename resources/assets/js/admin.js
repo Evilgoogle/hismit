@@ -296,14 +296,9 @@ $(document).on('click', 'button.js_switch', function() {
 
     //reset input
     $('.langActive_insert').removeClass('active_insert');
-    //reset imageBlock history
-    $('.history_gallery .title_hidden').removeClass('active');
 
     //set input
     $('.js_lang_'+$this.data('switch')).addClass('active_insert');
-
-    //set imageBlock history
-    $('.history_gallery .js_lang_bn_'+$this.data('switch')).addClass('active');
 });
 
 /* Установка языка по умолчанию */
@@ -326,22 +321,6 @@ $(document).on('click', '.js_default_lang', function(){
                 $this.removeClass('btn-default');
                 $this.addClass('btn-primary');
             }
-        }
-    });
-});
-
-$(document).on('change', '.city-content select', function(){
-    var city_id = $(this).val();
-
-    $.ajax({
-        url: '/admin/city/get-city-areas',
-        method: 'POST',
-        data: {city_id: city_id},
-        headers: {
-            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-        },
-        success: function(result) {
-            $('.area-content select').html(result).selectpicker('refresh');
         }
     });
 });
