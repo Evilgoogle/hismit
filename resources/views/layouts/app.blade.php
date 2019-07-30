@@ -14,12 +14,12 @@
     <?php
       if (isset($seo_new)) $seo = $seo_new;
     ?>
-    <title>{{ isset($title) ? $title : config('app.name') }}</title>
-    <meta name="description" content="{{ $description ?? '' }}">
-    <meta property="og:title" content="{{ isset($title) ? $title : config('app.name') }}">
-    <meta property="og:description" content="{{ $description ?? '' }}">
+    <title>{{ isset($seo->title) ? ($seo->title) : config('app.name') }}</title>
+    <meta name="description" content="{{ $seo->description ?? '' }}">
+    <meta property="og:title" content="{{ isset($seo->title) ? $seo->title : config('app.name') }}">
+    <meta property="og:description" content="{{ $seo->description ?? '' }}">
     <meta property="og:url" content="{{ url()->current() }}/" />
-    <meta property="og:image" content="/public/images/logo_bill.png">
+    <meta property="og:image" content="/images/logo.jpg">
     <meta property="og:image:url" content="{{ $seo->image ?? '' }}" />
     <meta property="og:image:width" content="{{ $seo->image_width ?? '' }}" />
     <meta property="og:image:height" content="{{ $seo->image_height ?? '' }}" />
