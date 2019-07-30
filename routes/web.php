@@ -72,7 +72,7 @@ Route::group(['middleware' => 'web'], function () {
             Route::post('default_lang', 'LangController@default_lang');
         });
 
-        Route::group(['prefix' => 'language_interface'], function () {
+        Route::group(['prefix' => 'language-interface'], function () {
             Route::get('', 'LangInterfaceController@index');
             if(config('emotions.language_developer')) {
                 Route::get('add', 'LangInterfaceController@add');

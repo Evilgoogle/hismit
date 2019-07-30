@@ -25,7 +25,7 @@
                     <a href="/admin/language">Доступные языки</a>
                 </li>
                 <li>
-                    <a href="/admin/language_interface">Интерфейс</a>
+                    <a href="/admin/language-interface">Интерфейс</a>
                 </li>
             </ul>
         </li>--}}

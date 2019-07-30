@@ -19,7 +19,7 @@ class RolesTableSeeder extends Seeder
                 'description' => 'Полный доступ к функционалу'
             ],
             [
-                'name' => 'login',
+                'name' => 'user',
                 'display_name' => 'Пользователь',
                 'description' => 'Добавленный пользователь, имеет доступ только к личному кабинету. Роль присваивается автоматически.'
             ],

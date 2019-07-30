@@ -11,9 +11,11 @@ use App\EmotionsGroup\Language\LangDb;
 
 class LangController extends Controller
 {
+    protected $crudClass;
+    protected $info;
+
     public function __construct() {
         $this->crudClass = new newCrudClass();
-
         $this->info = (object)[];
         $this->info->head = 'Доступные языки';
         $this->info->url = 'language';

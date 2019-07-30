@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }} | Admin Panel</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="{{ asset('adminbsb/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('adminbsb/css/materialize.css') }}" rel="stylesheet">
@@ -37,7 +37,7 @@
             </div>
         </div>
     </nav>
-    
+
     <section>
         <aside id="leftsidebar" class="sidebar">
             <!-- User Info -->
@@ -77,17 +77,17 @@
         </aside>
         <!-- #END# Left Sidebar -->
     </section>
-    
+
     <section class="content">
         <div class="container-fluid">
-    
+
             @if(Session::has('message'))
                 <div class="alert bg-blue alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     {{ Session::get('message') }}
                 </div>
             @endif
-    
+
             @if ($errors->any())
                 <div class="alert alert-danger" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -96,9 +96,9 @@
                     </ul>
                 </div>
             @endif
-    
+
             @yield('admin_content')
-    
+
         </div>
     </section>
 

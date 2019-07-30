@@ -12,17 +12,19 @@ use Illuminate\Support\Facades\Validator;
 class LangInterfaceController extends Controller
 {
     protected $control = false;
+    protected $crudClass;
+    protected $info;
 
     public function __construct()
     {
         $this->crudClass = new newCrudClass();
         $this->info = (object)[];
         $this->info->head = 'Интерфейс';
-        $this->info->url = 'language_interface';
+        $this->info->url = 'language-interface';
         $this->info->modelName = 'LanguageInterface';
 
         /* Включение и отклчючение возможности добавить и удалить текста интерефейса*/
-        if(config('myconfig.language_developer')) {
+        if(config('emotions.language_developer')) {
             $this->control = true;
         } else {
             $this->control = false;
