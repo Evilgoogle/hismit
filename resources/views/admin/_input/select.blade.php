@@ -13,6 +13,7 @@
                     {{ isset($array) && $array ? 'multiple' : '' }}
                     {{ isset($disabled) && $disabled ? 'disabled' : '' }}>
                     @if (!empty($options))
+                        <option value="null">Выберите пункт</option>
                         @foreach($options as $o)
                             <option value="{{ $o->$oKey }}" {{ $selectedId == $o->$oKey ? 'selected' : '' }}>{{ $o->$oValue }}</option>
                         @endforeach

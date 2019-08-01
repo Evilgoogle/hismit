@@ -91,7 +91,10 @@ class Ontomany
                         if(is_array($value)) {
                             $item->$key = json_encode($value, JSON_UNESCAPED_UNICODE);
                         } else {
-                            $item->$key = $value;
+                            if (is_null($value))
+                                $item->$key = null;
+                            else
+                                $item->$key = $value;
                         }
                         /* */
 

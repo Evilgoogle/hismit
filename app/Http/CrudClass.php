@@ -83,7 +83,10 @@ class CrudClass
             try {
                 foreach ($requestNew as $key => $value) {
                     if (!in_array($key, $bools) && !in_array($key, $files) && !isset($_FILES[$key]) && in_array($key, $tableColumns)) {
-                        $item->$key = $value;
+                        if (is_null($value))
+                            $item->$key = null;
+                        else
+                            $item->$key = $value;
                     }
 
                     if (in_array($key, $bools) && in_array($key, $tableColumns)) {
