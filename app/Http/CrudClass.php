@@ -94,7 +94,7 @@ class CrudClass
                     }
 
                     if (isset($_FILES[$key]) && (!is_array($_FILES[$key]['tmp_name']) || is_object(!$_FILES[$key]['tmp_name'])) && in_array($key, $tableColumns)) {
-//                      $this->fileClass->removeFile($key);
+                        $this->fileClass->removeFile($key);
                         $this->fileClass->putFile($value, $key, $item, false, $upload_url);
                     }
                 }
@@ -116,9 +116,9 @@ class CrudClass
             $item->save();
 
             if (in_array('position', $tableColumns) || in_array('url', $tableColumns)) {
-//                if (in_array('position', $tableColumns)) {
-//                    $item->position = $item->id;
-//                }
+                if (in_array('position', $tableColumns)) {
+                    $item->position = $item->id;
+                }
 
                 if (in_array('url', $tableColumns) && !array_key_exists('url', (array)$requestNew)) {
                     if (in_array('title', $tableColumns)/* && empty($item->url)*/) {
@@ -346,7 +346,7 @@ class CrudClass
                 ];
             }
 
-//            $this->fileClass->removeFile($item->$columnName);
+            $this->fileClass->removeFile($item->$columnName);
 
             if($remove == 1) {
                 $item->delete();

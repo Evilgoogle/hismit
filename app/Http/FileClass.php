@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use Intervention\Image\Facades\Image;
+
 class FileClass
 {
     private $rootUpload;
@@ -20,7 +22,17 @@ class FileClass
 
         $file_extension = strtolower($file->getClientOriginalExtension());
         $file_name = md5(str_random(10) . time()) . '.' . $file_extension;
-        $file->move($this->rootUpload, $file_name);
+//        $file->move($this->rootUpload, $file_name);
+
+        // compress
+        if (Image::make($file)->width() <= 1920)
+            $img = Image::make($file);
+        else
+            $img = Image::make($file)->resize(1920, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+
+        $img->save($this->rootUpload.'/'.$file_name, 75);
 
         return $item->$field_name = $file_name;
     }
@@ -29,7 +41,17 @@ class FileClass
     {
         $file_extension = strtolower($file->getClientOriginalExtension());
         $file_name = md5(str_random(10) . time()) . '.' . $file_extension;
-        $file->move($this->rootUpload, $file_name);
+//        $file->move($this->rootUpload, $file_name);
+
+        // compress
+        if (Image::make($file)->width() <= 1920)
+            $img = Image::make($file);
+        else
+            $img = Image::make($file)->resize(1920, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+
+        $img->save($this->rootUpload.'/'.$file_name, 75);
 
         return $file_name;
     }
