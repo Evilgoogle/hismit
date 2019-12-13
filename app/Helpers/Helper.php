@@ -133,3 +133,15 @@ if(!function_exists('getActiveLang')) {
         return $item->title;
     }
 }
+
+if (!function_exists('svgBlade')) {
+
+    function svgBlade($path, $class) {
+        $svg = new \DOMDocument();
+        $svg->load($path);
+        $svg->documentElement->setAttribute("class", $class);
+        $output = $svg->saveXML($svg->documentElement);
+
+        return $output;
+    }
+}
