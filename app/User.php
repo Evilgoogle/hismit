@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Notifications\MailResetPasswordToken;
+use App\Notifications\MailResetPasswordNotification;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\DB;
@@ -33,7 +33,7 @@ class User extends Authenticatable
 
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new MailResetPasswordToken($token));
+        $this->notify(new MailResetPasswordNotification($token));
     }
 
     public static function removeUser($id)
@@ -41,5 +41,17 @@ class User extends Authenticatable
         DB::table('users')
             ->where('id', $id)
             ->delete();
+    }
+
+    public static function getAllUsersNotAdmin()
+    {
+        $role = Role::where('name', 'superadmin')->first();
+
+        return DB::table('users as u')
+            ->select('u.*', 'r.display_name as role_name')
+            ->leftJoin('role_user as ru', 'ru.user_id', '=', 'u.id')
+            ->leftJoin('roles as r', 'r.id', '=', 'ru.role_id')
+            ->where('ru.role_id', '!=', $role->id)
+            ->get();
     }
 }
