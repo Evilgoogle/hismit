@@ -16,6 +16,7 @@
                             <th>ID</th>
                             <th>Имя</th>
                             <th>E-mail</th>
+                            <th>Роль</th>
                             <th>Опции</th>
                         </tr>
                     </thead>
@@ -25,6 +26,7 @@
                             <th>{{ $user->id }}</th>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
+                            <td>{{ $user->role_name }}</td>
                             <td><a href="/admin/access/users/edit/{{ $user->id }}">Изменить</a> <a href="/admin/access/users/remove/{{ $user->id }}">Удалить</a></td>
                         </tr>
                     @endforeach

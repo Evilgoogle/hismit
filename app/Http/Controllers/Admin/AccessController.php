@@ -21,7 +21,7 @@ class AccessController extends Controller
 
     public function index()
     {
-        $users = User::all();
+        $users = User::getAllUsersNotAdmin();
 //        $roles = Role::all();
 //        $permissions = Permission::all();
 
