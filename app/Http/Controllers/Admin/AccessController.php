@@ -22,10 +22,10 @@ class AccessController extends Controller
     public function index()
     {
         $users = User::all();
-        $roles = Role::all();
-        $permissions = Permission::all();
+//        $roles = Role::all();
+//        $permissions = Permission::all();
 
-        return view('admin.access.index', compact('users', 'roles', 'permissions'));
+        return view('admin.access.index', compact('users'/*, 'roles', 'permissions'*/));
     }
 
     /*
@@ -44,7 +44,7 @@ class AccessController extends Controller
         $rules = [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-//            'password' => 'required|min:6|confirmed',
+//            'password' => 'required|min:8|confirmed',
         ];
 
         $v = Validator::make($request->all(), $rules);
@@ -66,15 +66,15 @@ class AccessController extends Controller
             }
         }
 
-        $data['name'] = $user->name;
-        $data['email'] = $user->email;
-        $data['password'] = $password;
-
-        Mail::send('admin.access.email_welcome', ['data' => $data], function($message) use ($data){
-            $message->from('zhetisu@spk-zhetisu.kz', 'АО «РИР «СПК «Жетісу»');
-            $message->subject('Вам предоставлен доступ');
-            $message->to($data['email']);
-        });
+//        $data['name'] = $user->name;
+//        $data['email'] = $user->email;
+//        $data['password'] = $password;
+//
+//        Mail::send('admin.access.email_welcome', ['data' => $data], function($message) use ($data){
+//            $message->from('default@yandex.ru', 'Default');
+//            $message->subject('Вам предоставлен доступ');
+//            $message->to($data['email']);
+//        });
 
         return redirect('/admin/access')->with('message', 'Пользователь добавлен');
     }
@@ -92,7 +92,7 @@ class AccessController extends Controller
     {
         $rules = [
             'name' => 'required|max:255',
-//            'password' => 'min:6|confirmed',
+//            'password' => 'min:8|confirmed',
         ];
 
         $v = Validator::make($request->all(), $rules);
@@ -135,7 +135,7 @@ class AccessController extends Controller
      * Roles begin
      * */
 
-    public function addRole()
+/*    public function addRole()
     {
         $permissions = Permission::all();
 
@@ -192,12 +192,12 @@ class AccessController extends Controller
         $role->description = trim($request->description);
         $role->save();
 
-/*        RolePermission::removeRoles($id);
-
-        foreach ($request->permission as $key => $value)
-        {
-            $role->attachPermission($value);
-        }*/
+//        RolePermission::removeRoles($id);
+//
+//        foreach ($request->permission as $key => $value)
+//        {
+//            $role->attachPermission($value);
+//        }
 
         return redirect('/admin/access')->with('message', 'Роль обновлена');
     }
@@ -209,7 +209,7 @@ class AccessController extends Controller
         RolePermission::removeRoles($id);
 
         return redirect('/admin/access')->with('message', 'Роль удалена');
-    }
+    }*/
 
     /*
      * Roles end

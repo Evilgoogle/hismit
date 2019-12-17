@@ -20,18 +20,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @forelse($users as $user)
+                    @foreach($users as $user)
                         <tr>
                             <th>{{ $user->id }}</th>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td><a href="/admin/access/users/edit/{{ $user->id }}">Изменить</a> <a href="/admin/access/users/remove/{{ $user->id }}">Удалить</a></td>
                         </tr>
-                    @empty
-                        <tr>
-                            <th colspan="4" class="text-center">Пользователей нет</th>
-                        </tr>
-                    @endforelse
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -39,7 +35,7 @@
     </div>
 </div>
 
-<div class="row clearfix">
+{{--<div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="header">
@@ -57,7 +53,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @forelse($roles as $role)
+                    @foreach($roles as $role)
                         <tr>
                             <th>{{ $role->id }}</th>
                             <td>{{ $role->display_name }}</td>
@@ -67,17 +63,13 @@
                                 {!! (($role->name == 'superadmin') || ($role->name == 'login')) ? '' : '<a href="/admin/access/roles/remove/'. $role->id .'">Удалить</a>' !!}
                             </td>
                         </tr>
-                    @empty
-                        <tr>
-                            <th colspan="4" class="text-center">Ролей нет</th>
-                        </tr>
-                    @endforelse
+                    @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-</div>
+</div>--}}
 
 {{--<div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -97,7 +89,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @forelse($permissions as $permission)
+                    @foreach($permissions as $permission)
                         <tr>
                             <th>{{ $permission->id }}</th>
                             <td>{{ $permission->display_name }}</td>
@@ -107,11 +99,7 @@
                                 <a href="/admin/access/permissions/remove/{{ $permission->id }}">Удалить</a>
                             </td>
                         </tr>
-                    @empty
-                        <tr>
-                            <th colspan="4" class="text-center">Действий нет</th>
-                        </tr>
-                    @endforelse
+                    @endforeach
                     </tbody>
                 </table>
             </div>
