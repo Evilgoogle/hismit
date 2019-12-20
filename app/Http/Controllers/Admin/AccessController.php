@@ -58,7 +58,7 @@ class AccessController extends Controller
         $user->password = bcrypt($password);
         $user->save();
 
-        $user->attachRole(Role::where('name', 'login')->first());
+        $user->attachRole(Role::where('name', 'user')->first());
 
         if ($request->has('role')) {
             foreach ($request->role as $key => $value) {
