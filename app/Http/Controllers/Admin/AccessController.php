@@ -124,7 +124,7 @@ class AccessController extends Controller
         User::removeUser($id);
         RoleUser::removeUser($id);
 
-        return redirect('/admin/access')->with('message', 'Пользователь удалена');
+        return redirect('/admin/access')->with('message', 'Пользователь удален');
     }
 
     /*
