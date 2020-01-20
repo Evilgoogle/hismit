@@ -45,7 +45,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::group(['prefix' => 'param'], function () {
             Route::post('add-param', 'AdminController@addParam');
         });
-        Route::post('removeArrJson', 'AdminController@removeArrJson');
 
         Route::group(['prefix' => 'config'], function () {
             Route::get('', 'ConfigController@edit');

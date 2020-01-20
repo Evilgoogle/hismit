@@ -21,8 +21,8 @@ class RolesTableSeeder extends Seeder
             [
                 'name' => 'user',
                 'display_name' => 'Пользователь',
-                'description' => 'Добавленный пользователь, имеет доступ только к личному кабинету. Роль присваивается автоматически.'
-            ],
+                'description' => 'Добавленный пользователь, имеет полный доступ к клиентской части сайта'
+            ]
         ];
 
         foreach ($roles as $key => $value){
