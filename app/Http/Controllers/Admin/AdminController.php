@@ -12,7 +12,7 @@ class AdminController extends Controller
 
     public function __construct()
     {
-        $this->middleware('role:superadmin');
+        $this->middleware('role:admin');
     }
 
     public function index()
@@ -34,5 +34,4 @@ class AdminController extends Controller
 
         return view('admin.params.'. $request->param);
     }
-    
 }

@@ -9,7 +9,7 @@
                     id="{{ $name }}"
                     name="{{ $name }}{{ isset($array) && $array ? '[]' : '' }}"
                     placeholder="{{ $label }}"
-                    value="{{ isset($item->$name) ? $item->$name : '' }}"
+                    value="{{ isset($item->$name) && @$type != 'password' ? $item->$name : '' }}"
                     {{ isset($required) && $required ? 'required' : '' }}
                     {{ isset($array) && $array ? 'multiple' : '' }}
                     {{ isset($disabled) && $disabled ? 'disabled' : '' }}>

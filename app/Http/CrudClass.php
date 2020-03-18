@@ -2,7 +2,8 @@
 
 namespace App\Http;
 
-use ElForastero\Transliterate\Transliteration;
+use ElForastero\Transliterate\Map;
+use ElForastero\Transliterate\Transliterator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 
@@ -64,6 +65,7 @@ class CrudClass
         ];
 
         $requestNew = (object)$request->except($exceptions_new);
+        $title_url = strip_tags(trim(str_replace(array_keys($array_map), array_values($array_map), htmlentities($requestNew->title, null, 'utf-8'))));
 
         $item = eval('return new \\App\\'. $modelName .';');
         $tableName = $item->getTable();
@@ -122,10 +124,12 @@ class CrudClass
 
                 if (in_array('url', $tableColumns) && !array_key_exists('url', (array)$requestNew)) {
                     if (in_array('title', $tableColumns)/* && empty($item->url)*/) {
+                        $transliterator = new Transliterator(Map::LANG_RU, Map::GOST_7_79_2000);
+
                         if ($url_id == true)
-                            $item->url = Transliteration::make(strip_tags(trim(str_replace(array_keys($array_map), array_values($array_map), htmlentities($requestNew->title, null, 'utf-8')))), ['type' => 'url', 'lowercase' => true]) .'-'. $item->id;
+                            $item->url = $transliterator->slugify($title_url) .'-'. $item->id;
                         else
-                            $item->url = Transliteration::make(strip_tags(trim(str_replace(array_keys($array_map), array_values($array_map), htmlentities($requestNew->title, null, 'utf-8')))), ['type' => 'url', 'lowercase' => true]);
+                            $item->url = $transliterator->slugify($title_url);
                     }
                 }
 

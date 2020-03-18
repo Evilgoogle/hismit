@@ -1,6 +1,8 @@
 <?php
 namespace App\EmotionsGroup\Crud\Elements;
-use ElForastero\Transliterate\Transliteration;
+
+use ElForastero\Transliterate\Map;
+use ElForastero\Transliterate\Transliterator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use \App\Http\FileClass;
@@ -45,7 +47,7 @@ class Ontomany
      * @param $files
      * @param $upload_url - временная папка для картин
      */
-    public function __construct($id = null, $modelName, $request, $requestNew, $parameter, $fileClass, $bools, $files, $upload_url) {
+    public function __construct($id = null, $modelName, $request, $requestNew, $parameter, $fileClass, $bools, $files, $upload_url, $url_id) {
         foreach ($modelName as $key=>$model) {
             if($key == 0) {
                 $main_model = $model;
@@ -139,7 +141,9 @@ class Ontomany
             if (in_array('position', $tableColumns) || in_array('url', $tableColumns)) {
                 if (in_array('url', $tableColumns) && !in_array('url', (array)$requestNew)) {
                     if (in_array('title', $tableColumns) && empty($item->url)) {
-                        $item->url = Transliteration::make(strip_tags($requestNew->title), ['type' => 'url', 'lowercase' => true]) .'-'. $item->id;
+                        $transliterator = new Transliterator(Map::LANG_RU, Map::GOST_7_79_2000);
+
+                        $item->url = $transliterator->slugify(strip_tags($requestNew->title)) .'-'. $item->id;
                     }
                 }
 

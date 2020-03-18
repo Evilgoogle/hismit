@@ -42,7 +42,9 @@
 
 @include('app.footer')
 
-{{--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXrKE5h-QaBB_NDgmMqTzEDaAj4NzM9Wk" type="text/javascript"></script>--}}
+
+<script src="{{ mix('js/vendor.js') }}"></script>
+<script src="https://api-maps.yandex.ru/2.1/?apikey=961044b9-ffa5-44ed-8184-a8c1222b1843&lang=ru_RU" type="text/javascript"></script>
 <script src="{{ mix('js/app.js') }}"></script>
 
 </body>

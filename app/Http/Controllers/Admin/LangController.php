@@ -21,7 +21,7 @@ class LangController extends Controller
         $this->info->url = 'language';
         $this->info->modelName = 'Language';
 
-        $this->middleware('role:superadmin');
+        $this->middleware('role:admin');
     }
 
     public function index() {
@@ -29,14 +29,14 @@ class LangController extends Controller
         $items = Language::all();
         $info = $this->info;
 
-        return view('admin.language.index', compact(['items', 'info']));
+        return view('admin.language.index', compact('items', 'info'));
     }
 
     public function add() {
 
         $info = $this->info;
 
-        return view('admin.language.insert', compact(['info']));
+        return view('admin.language.insert', compact('info'));
     }
 
     public function edit($id)
@@ -50,7 +50,7 @@ class LangController extends Controller
             return back()->withErrors($e->getMessage());
         }
 
-        return view('admin.language.insert', compact(['item', 'info', 'lang']));
+        return view('admin.language.insert', compact('item', 'info', 'lang'));
     }
 
     public function remove($id)

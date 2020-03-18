@@ -3,7 +3,7 @@
 Route::group(['middleware' => 'web'], function () {
     Auth::routes();
 
-    Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'role:superadmin']], function () {
+    Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'role:admin']], function () {
 
         Route::get('', 'AdminController@index');
 
@@ -14,32 +14,20 @@ Route::group(['middleware' => 'web'], function () {
             Route::post('update-password', 'ProfileController@updatePassword');
         });
 
-        Route::group(['prefix' => 'access', 'middleware' => ['role:superadmin']], function () {
-            Route::get('', 'AccessController@index');
+        Route::group(['prefix' => 'users'], function () {
+            Route::get('', 'UserController@index');
+            Route::get('add', 'UserController@add');
+            Route::get('edit/{id}', 'UserController@edit');
+            Route::post('insert/{id?}', 'UserController@insert');
+            Route::get('remove/{id}', 'UserController@remove');
+        });
 
-            Route::group(['prefix' => 'users'], function () {
-                Route::get('add', 'AccessController@addUser');
-                Route::post('create', 'AccessController@createUser');
-                Route::get('edit/{id}', 'AccessController@editUser');
-                Route::post('update/{id}', 'AccessController@updateUser');
-                Route::get('remove/{id}', 'AccessController@removeUser');
-            });
-
-            Route::group(['prefix' => 'roles'], function () {
-                Route::get('add', 'AccessController@addRole');
-                Route::post('create', 'AccessController@createRole');
-                Route::get('edit/{id}', 'AccessController@editRole');
-                Route::post('update/{id}', 'AccessController@updateRole');
-                Route::get('remove/{id}', 'AccessController@removeRole');
-            });
-
-            Route::group(['prefix' => 'permissions'], function () {
-                Route::get('add', 'AccessController@addPermission');
-                Route::post('create', 'AccessController@createPermission');
-                Route::get('edit/{id}', 'AccessController@editPermission');
-                Route::post('update/{id}', 'AccessController@updatePermission');
-                Route::get('remove/{id}', 'AccessController@removePermission');
-            });
+        Route::group(['prefix' => 'roles'], function () {
+            Route::get('', 'RoleController@index');
+            Route::get('add', 'RoleController@add');
+            Route::get('edit/{id}', 'RoleController@edit');
+            Route::post('insert/{id?}', 'RoleController@insert');
+            Route::get('remove/{id}', 'RoleController@remove');
         });
 
         Route::group(['prefix' => 'param'], function () {
@@ -146,8 +134,11 @@ Route::group(['middleware' => 'web'], function () {
     $_ENV['default_lang'] = $get_allLanguage->default_lang;
     $_ENV['routing'] = $routing;
 
+    Route::post('check-username', 'ServiceController@checkUsername');
+    Route::post('check-email', 'ServiceController@checkEmail');
+
     Route::group(['prefix' => $routing], function () {
         Route::get('', 'IndexController@index');
-        Route::get('news/{url?}', 'IndexController@news')->name('news.show');
+//        Route::get('news/{url?}', 'IndexController@news')->name('news.show');
     });
 });

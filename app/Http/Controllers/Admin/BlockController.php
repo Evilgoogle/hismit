@@ -20,7 +20,7 @@ class BlockController extends Controller
         $this->info->head = 'Текста';
         $this->info->url = 'block';
         $this->info->modelName = 'Block';
-        $this->middleware('role:superadmin');
+        $this->middleware('role:admin');
     }
 
     public function index()
@@ -28,14 +28,14 @@ class BlockController extends Controller
         $items = Block::all();
         $info = $this->info;
 
-        return view('admin.'.$this->info->url.'.index', compact(['items', 'info']));
+        return view('admin.'.$this->info->url.'.index', compact('items', 'info'));
     }
 
     public function add()
     {
         $info = $this->info;
 
-        return view('admin.'.$this->info->url.'.insert', compact(['info']));
+        return view('admin.'.$this->info->url.'.insert', compact('info'));
     }
 
     public function edit($id)
@@ -48,7 +48,7 @@ class BlockController extends Controller
             return back()->withErrors($e->getMessage());
         }
 
-        return view('admin.'.$this->info->url.'.insert', compact(['item', 'info']));
+        return view('admin.'.$this->info->url.'.insert', compact('item', 'info'));
     }
 
     public function remove($id)

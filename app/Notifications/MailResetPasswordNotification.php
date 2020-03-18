@@ -3,24 +3,21 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class MailResetPasswordNotification extends Notification
 {
     use Queueable;
 
     /**
-     * Create a new notification instance.
-     *
-     * @return void
+     * @var $token
      */
-
     public $token;
 
     /**
-     * Create a notification instance.
+     * Create a new notification instance.
      *
      * @param  string  $token
      * @return void
@@ -49,7 +46,7 @@ class MailResetPasswordNotification extends Notification
      */
     public function toMail($notifiable)
     {
-    	$link = url("/password/reset/?token=" . $this->token);
+        $link = url("/password/reset/?token=" . $this->token);
 
         return (new MailMessage)
             ->subject("Сброс пароля")

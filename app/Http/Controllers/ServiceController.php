@@ -6,6 +6,7 @@ use App\Http\FileClass;
 use App\News;
 use App\RequestCall;
 use App\Subscribe;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -82,4 +83,27 @@ class ServiceController extends Controller
         return response()->view('sitemap', compact('news'))->header('Content-Type', 'application/xml');
     }
 
+    public function checkUsername(Request $request)
+    {
+        $username = $request->string;
+        $isExists = User::checkUsername($username);
+
+        if($isExists > 0){
+            return response()->json(["status" => false, "message" => "Это имя пользователя уже занято"]);
+        }else{
+            return response()->json(["status" => true]);
+        }
+    }
+
+    public function checkEmail(Request $request)
+    {
+        $email = $request->string;
+        $isExists = User::checkEmail($email);
+
+        if($isExists > 0){
+            return response()->json(["status" => false, "message" => "Этот e-mail уже занят"]);
+        }else{
+            return response()->json(["status" => true]);
+        }
+    }
 }

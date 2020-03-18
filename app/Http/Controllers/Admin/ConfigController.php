@@ -22,7 +22,7 @@ class ConfigController extends Controller
         $this->info->head = 'Конфиг';
         $this->info->url = 'config';
         $this->info->modelName = 'Config';
-        $this->middleware('role:superadmin');
+        $this->middleware('role:admin');
     }
 
     public function edit()
@@ -31,7 +31,7 @@ class ConfigController extends Controller
 
         $items = Config::all();
 
-        return view('admin.config', compact(['items', 'info']));
+        return view('admin.config', compact('items', 'info'));
     }
 
     public function update(Request $request)

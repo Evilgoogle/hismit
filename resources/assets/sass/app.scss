@@ -1,34 +1,7 @@
-/* Normalize */
-@import "normalize";
-
-/* Fonts */
+@import "normalize.css";
 @import "fonts";
-
-// Variables
-@import 'variables';
-
-// Media points
-@import 'media';
-
-/* Font-Awesome */
-//@import "~font-awesome/scss/font-awesome";
-
-/* Swiper */
-//@import "~swiper/dist/css/swiper";
-
-/*Sweetalert2*/
-//@import "~sweetalert2/src/sweetalert2";
-
-//Select2
-//@import "selectize.css";
-
-//WOW
-//@import "animate";
-
-//@import "~hc-offcanvas-nav/src/scss/hc-offcanvas-nav";
-
-// Jquery UI
-//@import "jquery-ui.css";
+@import "media";
+@import "_variables";
 
 /*------------------------------------*/
 
@@ -44,11 +17,6 @@ input[type=text], input[type=email], textarea {
 
 .wow {
     visibility: hidden;
-}
-
-//variables
-:root {
-
 }
 
 .container {
@@ -158,7 +126,7 @@ main {
             position: relative;
             display: initial;
             line-height: 1.5;
-            color: $color-light-green;
+            color: black;
 
             @include respond-to(w-640) {
                 font-size: 14px;
@@ -172,14 +140,14 @@ main {
             &::after {
                 content: '→';
                 font-family: $font-robcond-regular;
-                color: $color-green;
+                //color: $color-green;
                 width: 22px;
                 display: inline-block;
                 text-align: center;
             }
 
             a {
-                color: $color-green;
+                color: black;
                 position: relative;
                 text-decoration: none;
             }

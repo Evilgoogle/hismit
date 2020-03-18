@@ -7,14 +7,20 @@
                 <span>Home</span>
             </a>
         </li>
-        {{--@role('superadmin')
+        @role('admin')
             <li>
-                <a href="/admin/access">
-                    <i class="material-icons">security</i>
-                    <span>Пользователи и роли</span>
+                <a href="/admin/users">
+                    <i class="material-icons">people</i>
+                    <span>Пользователи</span>
                 </a>
             </li>
-        @endrole--}}
+            <li>
+                <a href="/admin/roles">
+                    <i class="material-icons">security</i>
+                    <span>Роли</span>
+                </a>
+            </li>
+        @endrole
         {{--<li>
             <a href="javascript:void(0);" class="menu-toggle">
                 <i class="fa fa-language" aria-hidden="true"></i>
@@ -30,12 +36,6 @@
             </ul>
         </li>--}}
         <li>
-            <a href="/admin/request-call">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>Заявки</span>
-            </a>
-        </li>
-        <li>
             <a href="/admin/seo">
                 <i class="material-icons">trending_up</i>
                 <span>SEO</span>
@@ -47,17 +47,23 @@
                 <span>Конфиг</span>
             </a>
         </li>
-        <li>
+        {{--<li>
+            <a href="/admin/request-call">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span>Заявки</span>
+            </a>
+        </li>--}}
+        {{--<li>
             <a href="/admin/block">
                 <i class="fa fa-file-text-o" aria-hidden="true"></i>
                 <span>Текста</span>
             </a>
-        </li>
-        <li>
+        </li>--}}
+        {{--<li>
             <a href="/admin/news">
                 <i class="fa fa-newspaper-o" aria-hidden="true"></i>
                 <span>Новости</span>
             </a>
-        </li>
+        </li>--}}
     </ul>
 </div>

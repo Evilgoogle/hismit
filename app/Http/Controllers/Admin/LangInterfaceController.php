@@ -30,7 +30,7 @@ class LangInterfaceController extends Controller
             $this->control = false;
         }
 
-        $this->middleware('role:superadmin');
+        $this->middleware('role:admin');
     }
 
     public function index() {
@@ -39,7 +39,7 @@ class LangInterfaceController extends Controller
         $info = $this->info;
         $control = $this->control;
 
-        return view('admin.language-interface.index', compact(['items', 'info', 'control']));
+        return view('admin.language-interface.index', compact('items', 'info', 'control'));
     }
 
     public function add() {
@@ -47,7 +47,7 @@ class LangInterfaceController extends Controller
         $info = $this->info;
         $allLang = Language::orderBy('position', 'asc')->get();
 
-        return view('admin.language-interface.insert', compact(['info', 'allLang']));
+        return view('admin.language-interface.insert', compact('info', 'allLang'));
     }
 
     public function edit($id)
@@ -61,7 +61,7 @@ class LangInterfaceController extends Controller
             return back()->withErrors($e->getMessage());
         }
 
-        return view('admin.language-interface.insert', compact(['item', 'info', 'allLang']));
+        return view('admin.language-interface.insert', compact('item', 'info', 'allLang'));
     }
 
     public function insert(Request $request, $id = null)
@@ -73,6 +73,7 @@ class LangInterfaceController extends Controller
         ];
 
         $v = Validator::make($request->all(), $rules);
+
         if ($v->fails()) return back()->withErrors($v->errors())->withInput();
 
         $result = $this->crudClass->insert($this->info->modelName, $id ,$request, null, null, null);

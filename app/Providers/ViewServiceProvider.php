@@ -2,21 +2,12 @@
 
 namespace App\Providers;
 
+use App\Http\ViewComposers\SeoComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class ViewServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        View::composer(['layouts.app'], 'App\Http\ViewComposers\SeoComposer');
-    }
-
     /**
      * Register services.
      *
@@ -25,5 +16,15 @@ class ViewServiceProvider extends ServiceProvider
     public function register()
     {
         //
+    }
+
+    /**
+     * Bootstrap services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        View::composer(['layouts.app'], SeoComposer::class);
     }
 }

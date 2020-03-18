@@ -16,7 +16,7 @@ class SeoComposer
         if (empty($url)) $url = "main";
         $seo = Seo::where('url', $url)->first();
 
-        $view->with(compact('seo'));
+        return $view->with(compact('seo'));
     }
 
 }

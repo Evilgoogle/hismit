@@ -13,7 +13,7 @@ class RequestCallController extends Controller
         $this->info->head = 'Заявки';
         $this->info->url = 'request-call';
         $this->info->modelName = 'RequestCall';
-        $this->middleware('role:superadmin');
+        $this->middleware('role:admin');
     }
 
     public function index()
@@ -21,6 +21,6 @@ class RequestCallController extends Controller
         $items = RequestCall::orderBy('id', 'desc')->get();
         $info = $this->info;
 
-        return view('admin.request-call.index', compact(['items', 'info']));
+        return view('admin.request-call.index', compact('items', 'info'));
     }
 }

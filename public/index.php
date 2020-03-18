@@ -1,14 +1,4 @@
 <?php
-if (substr($_SERVER['HTTP_HOST'], 0, 4) === 'www.') {
-    header("HTTP/1.1 301 Moved Permanently");
-    header('Location: http'.(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on' ? 's':'').'://' . substr($_SERVER['HTTP_HOST'], 4).strtolower($_SERVER['REQUEST_URI']));
-    exit;
-}
-if (substr($_SERVER['HTTP_HOST'], -1, 1) === '.') {
-    header("HTTP/1.1 301 Moved Permanently");
-    header('Location: http'.(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on' ? 's':'').'://' . substr($_SERVER['HTTP_HOST'], 0, -1).strtolower($_SERVER['REQUEST_URI']));
-    exit;
-}
 
 /**
  * Laravel - A PHP Framework For Web Artisans

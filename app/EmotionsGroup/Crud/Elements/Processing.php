@@ -1,8 +1,10 @@
 <?php
 namespace App\EmotionsGroup\Crud\Elements;
+
 use App\EmotionsGroup\Language\LangDb;
 use App\Http\CrudClass;
-use ElForastero\Transliterate\Transliteration;
+use ElForastero\Transliterate\Map;
+use ElForastero\Transliterate\Transliterator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use \App\Http\FileClass;
@@ -102,6 +104,9 @@ class Processing
                         | Если попадется массив c ключом set_lang что указывает на наличие языков,
                         | то в Transliteration пойдет title того языка который идет по умолчанию
                         */
+
+                        $transliterator = new Transliterator(Map::LANG_RU, Map::GOST_7_79_2000);
+
                         if(is_array($requestNew->title)) {
                             if(array_key_exists('set_lang', $requestNew->title)) {
                                 foreach ($requestNew->title as $title_array) {
@@ -110,16 +115,16 @@ class Processing
                                         $lang->get();
                                         if($lang->default_lang == $language) {
                                             if ($url_id == true)
-                                                $item->url = Transliteration::make(strip_tags($setTitle), ['type' => 'url', 'lowercase' => true]) .'-'. $item->id;
+                                                $item->url = $transliterator->slugify(strip_tags($setTitle)) .'-'. $item->id;
                                             else
-                                                $item->url = Transliteration::make(strip_tags($setTitle), ['type' => 'url', 'lowercase' => true]);
+                                                $item->url = $transliterator->slugify(strip_tags($setTitle));
                                         }
                                     }
                                 }
                             }
 
                         } else {
-                            $item->url = Transliteration::make(strip_tags($requestNew->title), ['type' => 'url', 'lowercase' => true]) .'-'. $item->id;
+                            $item->url = $transliterator->slugify(strip_tags($requestNew->title)) .'-'. $item->id;
                         }
                     }
                 }

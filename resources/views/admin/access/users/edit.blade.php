@@ -13,16 +13,28 @@
                     {{ csrf_field() }}
                     <div class="row clearfix">
                         <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                            <label for="display_name">Имя пользователя *</label>
+                            <label for="name">Имя</label>
                         </div>
                         <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" id="name" name="name" class="form-control" placeholder="Имя пользователя" value="{{ $user->name }}" required>
+                                    <input type="text" id="name" class="form-control" placeholder="Имя" value="{{ $user->name }}" readonly>
                                 </div>
                             </div>
                         </div>
                     </div>
+{{--                    <div class="row clearfix">
+                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                            <label for="username">Имя пользователя (уникальное)</label>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="username" class="form-control" placeholder="username" value="{{ $user->username }}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>--}}
                     <div class="row clearfix">
                         <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                             <label for="email">E-mail *</label>
@@ -30,36 +42,30 @@
                         <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="email" id="email" class="form-control" placeholder="E-mail" value="{{ $user->email }}" disabled>
+                                    <input type="email" class="form-control" placeholder="E-mail" value="{{ $user->email }}" readonly>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="row clearfix">
+                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                            <label for="referrer_id">Выбрать реферала</label>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick" id="referrer_id" name="referrer_id">
+                                        @foreach($roles as $role)
+                                            <option value="{{ $role->id }}" {{ in_array($role->id, $role_user) ? "selected" : "" }} {{ ($role->name == 'login') ? "disabled" : "" }}>{{ $role->display_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
 {{--                    <div class="row clearfix">
-                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                            <label for="password">Пароль</label>
-                        </div>
-                        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="password" id="password" name="password" class="form-control" placeholder="Пароль">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row clearfix">
-                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                            <label for="password_confirmation">Повторите пароль</label>
-                        </div>
-                        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" placeholder="Повторите пароль">
-                                </div>
-                            </div>
-                        </div>
-                    </div>--}}
-                    <div class="row clearfix">
                         <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                             <label for="role">Роли *</label>
                         </div>
@@ -74,12 +80,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row clearfix">
-                        <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
-                            <button type="submit" class="btn btn-primary m-t-10 waves-effect">Изменить</button>
-                        </div>
-                    </div>
+                    </div>--}}
                 </form>
             </div>
         </div>

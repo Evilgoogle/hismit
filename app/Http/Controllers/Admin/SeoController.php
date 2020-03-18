@@ -20,7 +20,7 @@ class SeoController extends Controller
         $this->info->head = 'SEO';
         $this->info->url = 'seo';
         $this->info->modelName = 'Seo';
-        $this->middleware('role:superadmin');
+        $this->middleware('role:admin');
     }
 
     public function index()
@@ -28,14 +28,14 @@ class SeoController extends Controller
         $items = Seo::all();
         $info = $this->info;
 
-        return view('admin.seo.index', compact(['items', 'info']));
+        return view('admin.seo.index', compact('items', 'info'));
     }
 
     public function add()
     {
         $info = $this->info;
 
-        return view('admin.seo.insert', compact(['info']));
+        return view('admin.seo.insert', compact('info'));
     }
 
     public function edit($id)
@@ -48,7 +48,7 @@ class SeoController extends Controller
             return back()->withErrors($e->getMessage());
         }
 
-        return view('admin.seo.insert', compact(['item', 'info']));
+        return view('admin.seo.insert', compact('item', 'info'));
     }
 
     public function remove($id)

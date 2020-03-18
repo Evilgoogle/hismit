@@ -20,7 +20,7 @@ class NewsController extends Controller
         $this->info->head = 'Новости';
         $this->info->url = 'news';
         $this->info->modelName = 'News';
-        $this->middleware('role:superadmin');
+        $this->middleware('role:admin');
     }
 
     public function index()
@@ -28,14 +28,14 @@ class NewsController extends Controller
         $items = News::orderBy('publish', 'desc')->get();
         $info = $this->info;
 
-        return view('admin.news.index', compact(['items', 'info']));
+        return view('admin.news.index', compact('items', 'info'));
     }
 
     public function add()
     {
         $info = $this->info;
 
-        return view('admin.news.insert', compact(['info']));
+        return view('admin.news.insert', compact('info'));
     }
 
     public function edit($id)
@@ -48,7 +48,7 @@ class NewsController extends Controller
             return back()->withErrors($e->getMessage());
         }
 
-        return view('admin.news.insert', compact(['item', 'info']));
+        return view('admin.news.insert', compact('item', 'info'));
     }
 
     public function remove($id)
