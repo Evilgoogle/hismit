@@ -145,3 +145,16 @@ if (!function_exists('svgBlade')) {
         return $output;
     }
 }
+
+if (!function_exists('getArrayFromJsonCollection')) {
+    function getArrayFromJsonCollection ($items, $requiredField) {
+        foreach ($items as $item) {
+            $array[] = $item;
+        }
+
+        foreach ($array as $key => $value) {
+            $value[$requiredField] = langFilter($value['title']);
+        }
+        return $array;
+    }
+}
