@@ -5,8 +5,8 @@ $(".button-logout").on( "click", function(event) {
 
 //Table
 $('.js-table').each(function (key, index) {
-    $this = $(this);
-    var $table = 'table_' + key;
+    var $this = $(this),
+        $table = 'table_' + key;
 
     $table = $('.js-table').DataTable({
         // dom: 'Bfrltip',
