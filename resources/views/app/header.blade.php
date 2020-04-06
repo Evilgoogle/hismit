@@ -1,22 +1,28 @@
 <?php
-    // active lang
-    $alllang = \App\Language::where('enable', true)->orderBy('position', 'asc')->get();
-    if (isset($_ENV['routing']) && !empty($_ENV['routing'])) {
-        $select_lang = $alllang->firstWhere('url', $_ENV['routing']);
-    } else {
-        $select_lang = $alllang->firstWhere('default', true);
-    }
+// active lang
+$all_langs = \App\Language::where('enable', true)->orderBy('position', 'asc')->get();
+$routing = env('routing');
 
-    // current url
-    $current_page = explode('/', url()->current());
-    for ($i = 0; $i < 3; $i++){
-        unset($current_page[$i]);
-    } if (count($current_page) > 0 && $current_page[3] == 'kz' || count($current_page) > 0 && $current_page[3] == 'ru' || count($current_page) > 0 && $current_page[3] == 'en'){
-        unset($current_page[3]);
-        $current_page = implode("/", $current_page);
-    } else{
-        $current_page = implode("/", $current_page);
-    }
+// select lang
+if (isset($routing) && !empty($routing)) {
+    $select_lang = $all_langs->firstWhere('url', $routing);
+} else {
+    $select_lang = $all_langs->firstWhere('default', true);
+}
+
+// current url
+$current_url = explode('/', request()->path());
+$urls = [];
+foreach ($all_langs as $lang) {
+    $urls[] = $lang->url;
+}
+
+if (in_array($current_url[0], $urls)) {
+    unset($current_url[0]);
+    $current_url = implode("/", $current_url);
+} else {
+    $current_url = implode("/", $current_url);
+}
 ?>
 
 <header>

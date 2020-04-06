@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Block;
-use App\Http\CrudClass;
+use App\EmotionsGroup\Crud\newCrudClass;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
+use App\EmotionsGroup\Basic\Validator;
 
 class BlockController extends Controller
 {
@@ -15,12 +15,12 @@ class BlockController extends Controller
 
     public function __construct()
     {
-        $this->crudClass = new CrudClass();
+        $this->crudClass = new newCrudClass();
         $this->info = (object)[];
         $this->info->head = 'Текста';
         $this->info->url = 'block';
         $this->info->modelName = 'Block';
-        $this->middleware('role:admin');
+        $this->middleware('role:superadmin');
     }
 
     public function index()
@@ -28,14 +28,14 @@ class BlockController extends Controller
         $items = Block::all();
         $info = $this->info;
 
-        return view('admin.'.$this->info->url.'.index', compact('items', 'info'));
+        return view('admin.'.$this->info->url.'.index', compact(['items', 'info']));
     }
 
     public function add()
     {
         $info = $this->info;
 
-        return view('admin.'.$this->info->url.'.insert', compact('info'));
+        return view('admin.'.$this->info->url.'.insert', compact(['info']));
     }
 
     public function edit($id)
@@ -48,7 +48,7 @@ class BlockController extends Controller
             return back()->withErrors($e->getMessage());
         }
 
-        return view('admin.'.$this->info->url.'.insert', compact('item', 'info'));
+        return view('admin.'.$this->info->url.'.insert', compact(['item', 'info']));
     }
 
     public function remove($id)
@@ -66,8 +66,10 @@ class BlockController extends Controller
             'desc' => 'required'
         ];
 
-        $v = Validator::make($request->all(), $rules);
-        if ($v->fails()) return back()->withErrors($v->errors())->withInput();
+        $v = new Validator();
+        $v->make($request->all(), $rules);
+
+        if ($v->fails() != 'ok') return back()->withErrors($v->fails())->withInput();
 
 //        $boolean_exceptions = ['enable'];
 

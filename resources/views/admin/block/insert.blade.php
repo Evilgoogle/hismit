@@ -3,6 +3,7 @@
 @section('admin_content')
 
 <input type="hidden" id="ajaxUrl" value="{{ $info->url }}">
+<?php \App\EmotionsGroup\Language\LangBoxs::get()?>
 
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -36,14 +37,18 @@
                         'required' => true
                     ])
 
-                    @include('admin._input.textarea', [
-                        'name' => 'desc',
-                        'label' => 'Контент',
-                        'item' => isset($item) ? $item : '',
-                        'required' => true,
-                        'editor' => true,
-                        'editor_type' => 'simple'
-                    ])
+                    @php
+                        $text = [
+                           'name' => 'desc',
+                           'label' => 'Контент',
+                           'item' => isset($item) ? $item : '',
+                           'required' => true,
+                           'editor' => true,
+                           'editor_type' => 'simple',
+                           'input_type' => 'textarea'
+                        ];
+                        echo (new \App\EmotionsGroup\Language\setTemplate($text))->set();
+                    @endphp
 
                     <div class="row clearfix">
                         <div class="col-sm-12">
