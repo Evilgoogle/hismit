@@ -1,11 +1,10 @@
 <?php
 namespace App\EmotionsGroup\Crud\Elements;
 
-use ElForastero\Transliterate\Map;
-use ElForastero\Transliterate\Transliterator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use \App\Http\FileClass;
+use Illuminate\Support\Str;
 
 /**
  * Class Ontomany
@@ -141,9 +140,7 @@ class Ontomany
             if (in_array('position', $tableColumns) || in_array('url', $tableColumns)) {
                 if (in_array('url', $tableColumns) && !in_array('url', (array)$requestNew)) {
                     if (in_array('title', $tableColumns) && empty($item->url)) {
-                        $transliterator = new Transliterator(Map::LANG_RU, Map::GOST_7_79_2000);
-
-                        $item->url = $transliterator->slugify(strip_tags($requestNew->title)) .'-'. $item->id;
+                        $item->url = Str::slug($requestNew->title) .'-'. $item->id;
                     }
                 }
 

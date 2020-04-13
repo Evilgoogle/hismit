@@ -2,10 +2,9 @@
 
 namespace App\Http;
 
-use ElForastero\Transliterate\Map;
-use ElForastero\Transliterate\Transliterator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class CrudClass
 {
@@ -31,41 +30,8 @@ class CrudClass
         if (!empty($file_exceptions) && isset($file_exceptions))
             $files = $file_exceptions;
 
-        $array_map = [
-            "&amp;" => "&",
-            "amp;" => "&",
-            "&nbsp;" => " ",
-            "nbsp;" => " ",
-            "&laquo;" => "«",
-            "laquo;" => "«",
-            "&raquo;" => "»",
-            "raquo;" => "»",
-            "&ndash;" => "–",
-            "ndash;" => "–",
-            "&mdash;" => "—",
-            "mdash;" => "—",
-            "&lsquo;" => "‘",
-            "lsquo;" => "‘",
-            "&rsquo;" => "’",
-            "rsquo;" => "’",
-            "&sbquo;" => "‚",
-            "sbquo;" => "‚",
-            "&ldquo;" => "“",
-            "ldquo;" => "“",
-            "&rdquo;" => "”",
-            "rdquo;" => "”",
-            "&bdquo;" => "„",
-            "bdquo;" => "„",
-            "&hellip;" => "…",
-            "hellip;" => "…",
-            "&prime;" => "′",
-            "prime;" => "′",
-            "&Prime;" => "″",
-            "Prime;" => "″"
-        ];
-
         $requestNew = (object)$request->except($exceptions_new);
-        $title_url = strip_tags(trim(str_replace(array_keys($array_map), array_values($array_map), htmlentities($requestNew->title, null, 'utf-8'))));
+        $title_url = Str::slug(strip_tags($requestNew->title));
 
         $item = eval('return new \\App\\'. $modelName .';');
         $tableName = $item->getTable();
@@ -124,12 +90,10 @@ class CrudClass
 
                 if (in_array('url', $tableColumns) && !array_key_exists('url', (array)$requestNew)) {
                     if (in_array('title', $tableColumns)/* && empty($item->url)*/) {
-                        $transliterator = new Transliterator(Map::LANG_RU, Map::GOST_7_79_2000);
-
                         if ($url_id == true)
-                            $item->url = $transliterator->slugify($title_url) .'-'. $item->id;
+                            $item->url = $title_url .'-'. $item->id;
                         else
-                            $item->url = $transliterator->slugify($title_url);
+                            $item->url = $title_url;
                     }
                 }
 

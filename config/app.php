@@ -179,7 +179,6 @@ return [
          * Custom Service Providers...
          */
         jeremykenedy\LaravelRoles\RolesServiceProvider::class,
-        ElForastero\Transliterate\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
         App\Providers\ViewServiceProvider::class,
