@@ -137,10 +137,17 @@ if(!function_exists('getActiveLang')) {
 if (!function_exists('svgBlade')) {
 
     function svgBlade($path, $class) {
-        $svg = new \DOMDocument();
-        $svg->loadHTML($path);
-        $svg->documentElement->setAttribute("class", $class);
-        $output = $svg->saveXML($svg->documentElement);
+		$arrContextOptions = [
+            "ssl" => [
+                "verify_peer" => false,
+                "verify_peer_name" => false,
+            ],
+        ]; 
+		$sw = file_get_contents($path, false, stream_context_create($arrContextOptions));
+		
+        $svg = new \SimpleXMLElement($sw);
+        $svg->addAttribute("class", $class);
+        $output = $svg->asXML();
 
         return $output;
     }
