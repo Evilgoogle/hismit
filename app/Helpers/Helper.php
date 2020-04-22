@@ -138,7 +138,7 @@ if (!function_exists('svgBlade')) {
 
     function svgBlade($path, $class) {
         $svg = new \DOMDocument();
-        $svg->load($path);
+        $svg->loadHTML($path);
         $svg->documentElement->setAttribute("class", $class);
         $output = $svg->saveXML($svg->documentElement);
 
