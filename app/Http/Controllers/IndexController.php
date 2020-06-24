@@ -6,7 +6,6 @@ use App\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
-//use Spatie\Searchable\Search;
 
 class IndexController extends Controller
 {

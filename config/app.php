@@ -236,7 +236,6 @@ return [
         /*
          * Custom Alias...
          */
-        'Transliterate' => ElForastero\Transliterate\Facade::class,
         'Image' => Intervention\Image\Facades\Image::class
     ],
 
