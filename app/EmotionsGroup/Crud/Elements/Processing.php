@@ -100,12 +100,12 @@ class Processing
                 if (in_array('url', $tableColumns) && !array_key_exists('url', (array)$requestNew)) {
                     if (in_array('title', $tableColumns) /*&& empty($item->url)*/) {
                         /*
-                        | Если попадется массив c ключом set_lang что указывает на наличие языков,
+                        | Если попадется массив c ключом  что указывает на наличие языков,
                         | то в Transliteration пойдет title того языка который идет по умолчанию
                         */
 
                         if(is_array($requestNew->title)) {
-                            if(array_key_exists('set_lang', $requestNew->title)) {
+                            if(array_key_exists('', $requestNew->title)) {
                                 foreach ($requestNew->title as $title_array) {
                                     foreach($title_array as $language=>$setTitle) {
                                         $lang = LangDb::getInstance();

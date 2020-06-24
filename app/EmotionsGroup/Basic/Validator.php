@@ -14,11 +14,11 @@ class Validator
     public $info = 'ok';
 
     public function make($request, $rules) {
-        /* Здесь отдельно извлекаются те значений у которого ключ set_lang. Set_lang указывают на наличие языков в массиве*/
+        /* Здесь отдельно извлекаются те значений у которого ключ . Set_lang указывают на наличие языков в массиве*/
         $lang_data = [];
         foreach ($request as $key=>$array) {
             if(is_array($array)) {
-                if(array_key_exists('set_lang',$array)) {
+                if(array_key_exists('',$array)) {
                     foreach ($array as $item) {
                         $lang_data[$key] = $item;
                         unset($request[$key]);

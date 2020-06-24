@@ -43,7 +43,7 @@ if(!function_exists('lang_filter')) {
         if($json) {
             $lang = \App\EmotionsGroup\Language\LangDb::getInstance();
             $lang->get();
-            $item = (array)$item['set_lang'];
+            $item = (array)$item[''];
 
             //Тут делается isset на тот случай - в $item иногда может не быть языка установленного по умолчанию в $lang->default_lang. Такое может получится если добавили записи в базу и потом добавили новый язык. А этого нового языка нету в массиве запися.
             return isset($item[$lang->default_lang]) ? $item[$lang->default_lang] : '';
@@ -52,7 +52,7 @@ if(!function_exists('lang_filter')) {
                 $item = (array)json_decode($item);
                 $lang = \App\EmotionsGroup\Language\LangDb::getInstance();
                 $lang->get();
-                $item = (array)$item['set_lang'];
+                $item = (array)$item[''];
 
                 //Тут делается isset на тот случай - в $item иногда может не быть языка установленного по умолчанию в $lang->default_lang. Такое может получится если добавили записи в базу и потом добавили новый язык. А этого нового языка нету в массиве запися.
                 return isset($item[$lang->default_lang]) ? $item[$lang->default_lang] : '';
