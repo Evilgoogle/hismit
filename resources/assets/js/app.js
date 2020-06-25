@@ -1,3 +1,5 @@
+require('./bootstrap');
+
 // Ширина и высота экрана
 const $displayWidht = screen.width;
 const $displayHeight = screen.height;
