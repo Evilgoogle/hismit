@@ -57,8 +57,8 @@ class ServiceController extends Controller
         $emails = explode(",", configKey('emails'));
 
         Mail::send('email.request', ['data' => $data], function($message) use ($emails) {
-            $message->from('default@yandex.ru', 'default.kz');
-            $message->subject('default | Новая заявка');
+            $message->from(env('MAIL_USERNAME'), url('/'));
+            $message->subject(env('APP_NAME').' Info | Новая заявка');
             $message->to($emails);
         });
 
