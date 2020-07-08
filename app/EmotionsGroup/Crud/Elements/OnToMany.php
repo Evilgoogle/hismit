@@ -1,10 +1,10 @@
 <?php
 namespace App\EmotionsGroup\Crud\Elements;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use \App\Http\FileClass;
-use Illuminate\Support\Str;
 
 /**
  * Class Ontomany
@@ -46,7 +46,7 @@ class Ontomany
      * @param $files
      * @param $upload_url - временная папка для картин
      */
-    public function __construct($id = null, $modelName, $request, $requestNew, $parameter, $fileClass, $bools, $files, $upload_url, $url_id) {
+    public function __construct($id = null, $modelName, $request, $requestNew, $parameter, $fileClass, $bools, $files, $upload_url, $url_id, $url_base) {
         foreach ($modelName as $key=>$model) {
             if($key == 0) {
                 $main_model = $model;
@@ -139,8 +139,8 @@ class Ontomany
             /* Если есть url то она сохранится в базе пройдя обработку в Transliteration */
             if (in_array('position', $tableColumns) || in_array('url', $tableColumns)) {
                 if (in_array('url', $tableColumns) && !in_array('url', (array)$requestNew)) {
-                    if (in_array('title', $tableColumns) && empty($item->url)) {
-                        $item->url = Str::slug($requestNew->title) .'-'. $item->id;
+                    if (in_array($url_base, $tableColumns) && empty($item->url)) {
+                        $item->url = Str::slug($requestNew->$url_base) .'-'. $item->id;
                     }
                 }
 

@@ -3,10 +3,10 @@ namespace App\EmotionsGroup\Crud\Elements;
 
 use App\EmotionsGroup\Language\LangDb;
 use App\Http\CrudClass;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use \App\Http\FileClass;
-use Illuminate\Support\Str;
 
 /**
  * Class Processing
@@ -17,7 +17,8 @@ class Processing
 {
     public $result;
 
-    public function __construct($id = null, $modelName, $request, $requestNew, $fileClass, $bools, $files, $upload_url, $url_id) {
+    public function __construct($id = null, $modelName, $request, $requestNew, $fileClass, $bools, $files, $upload_url, $url_id, $url_base) {
+
         $item = eval('return new \\App\\'. $modelName .';');
         $tableName = $item->getTable();
         if (Schema::hasTable($tableName)) {
@@ -98,15 +99,15 @@ class Processing
             /* Если есть url то она сохранится в базе пройдя обработку в Transliteration */
             if (in_array('position', $tableColumns) || in_array('url', $tableColumns)) {
                 if (in_array('url', $tableColumns) && !array_key_exists('url', (array)$requestNew)) {
-                    if (in_array('title', $tableColumns) /*&& empty($item->url)*/) {
+                    if (in_array($url_base, $tableColumns) /*&& empty($item->url)*/) {
                         /*
-                        | Если попадется массив c ключом  что указывает на наличие языков,
+                        | Если попадется массив c ключом set_lang что указывает на наличие языков,
                         | то в Transliteration пойдет title того языка который идет по умолчанию
                         */
 
-                        if(is_array($requestNew->title)) {
-                            if(array_key_exists('', $requestNew->title)) {
-                                foreach ($requestNew->title as $title_array) {
+                        if(is_array($requestNew->$url_base)) {
+                            if(array_key_exists('set_lang', $requestNew->$url_base)) {
+                                foreach ($requestNew->$url_base as $title_array) {
                                     foreach($title_array as $language=>$setTitle) {
                                         $lang = LangDb::getInstance();
                                         $lang->get();
@@ -121,7 +122,7 @@ class Processing
                             }
 
                         } else {
-                            $item->url = Str::slug(strip_tags($requestNew->title)) .'-'. $item->id;
+                            $item->url = Str::slug(strip_tags($requestNew->$url_base)) .'-'. $item->id;
                         }
                     }
                 }

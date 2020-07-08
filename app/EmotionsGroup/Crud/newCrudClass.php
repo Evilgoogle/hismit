@@ -25,7 +25,7 @@ class newCrudClass extends \App\Http\CrudClass {
      * @param null $custom - если мы хотим подключить другие обработчики, то отправляем сюда массив с элементами
      * @return array
      */
-    public function insert($modelName, $id = null, $request, $exceptions = null, $boolean_exceptions = null, $file_exceptions = null, $upload_url = null, $url_id = true, $custom = null) {
+    public function insert($modelName, $id = null, $request, $exceptions = null, $boolean_exceptions = null, $file_exceptions = null, $upload_url = null, $url_id = true, $custom = null, $url_base = 'title') {
 
         if (!empty($exceptions) && isset($exceptions))
             $exceptions_new = array_merge(['_token'], $exceptions);
@@ -59,7 +59,7 @@ class newCrudClass extends \App\Http\CrudClass {
                         | Подключается класс Ontomany которая делает добавлеие записи в таблицу, а также
                         | делает добавление записи дополнительную еще одну таблицу
                         */
-                        $result = (new Ontomany($id, $modelName, $request, $requestNew, $parameter, $this->fileClass, $bools, $files, $upload_url, $url_id))->result;
+                        $result = (new Ontomany($id, $modelName, $request, $requestNew, $parameter, $this->fileClass, $bools, $files, $upload_url, $url_id, $url_base))->result;
                     }
                 }
             } else {
@@ -67,14 +67,14 @@ class newCrudClass extends \App\Http\CrudClass {
                     /* ---- Processing -------
                     | Стандартная обработка данных каждого моделя
                     */
-                    $result = (new Processing($id, $model, $request, $requestNew, $this->fileClass, $bools, $files, $upload_url, $url_id))->result;
+                    $result = (new Processing($id, $model, $request, $requestNew, $this->fileClass, $bools, $files, $upload_url, $url_id, $url_base))->result;
                 }
             }
         } else {
             /* ---- Processing -------
             | Стандартная обработка данных
             */
-            $result = (new Processing($id, $modelName, $request, $requestNew, $this->fileClass, $bools, $files, $upload_url, $url_id))->result;
+            $result = (new Processing($id, $modelName, $request, $requestNew, $this->fileClass, $bools, $files, $upload_url, $url_id, $url_base))->result;
         }
 
         return $result;
