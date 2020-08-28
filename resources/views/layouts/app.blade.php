@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link href="{{ mix('css/vendor.css') }}" rel="stylesheet">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <script>
         window.Laravel = {!! json_encode(['csrfToken' => csrf_token()]) !!};
