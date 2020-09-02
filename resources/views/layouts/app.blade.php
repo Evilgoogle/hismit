@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link href="{{ mix('css/vendor.css') }}" rel="stylesheet">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <script>
         window.Laravel = {!! json_encode(['csrfToken' => csrf_token()]) !!};
@@ -43,8 +42,6 @@
 
 @include('app.footer')
 
-
-<script src="{{ mix('js/vendor.js') }}"></script>
 <script src="https://api-maps.yandex.ru/2.1/?apikey=961044b9-ffa5-44ed-8184-a8c1222b1843&lang=ru_RU" type="text/javascript"></script>
 <script src="{{ mix('js/app.js') }}"></script>
 

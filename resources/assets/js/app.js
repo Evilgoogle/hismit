@@ -1,4 +1,9 @@
 require('./bootstrap');
+window.$ = window.jQuery = require('jquery');
+// import Swiper from 'swiper/js/swiper';
+// window.WOW = require('./wow');
+import Swal from 'sweetalert2/dist/sweetalert2';
+// require('./jquery.inputmask.bundle');
 
 // Ширина и высота экрана
 const $displayWidht = screen.width;
