@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'RobotoCondensed Regular';
-    src: url('../fonts/RobotoCondensed-Regular.ttf') format('truetype');
+    src: url('/fonts/RobotoCondensed-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -8,7 +8,7 @@ $font-robcond-regular: "RobotoCondensed Regular";
 
 @font-face {
     font-family: 'RobotoCondensed Light';
-    src: url('../fonts/RobotoCondensed-Light.ttf') format('truetype');
+    src: url('/fonts/RobotoCondensed-Light.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -16,7 +16,7 @@ $font-robcond-light: "RobotoCondensed Light";
 
 @font-face {
     font-family: 'RobotoCondensed Bold';
-    src: url('../fonts/RobotoCondensed-Bold.ttf') format('truetype');
+    src: url('/fonts/RobotoCondensed-Bold.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
