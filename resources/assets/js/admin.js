@@ -3,6 +3,8 @@ $(".button-logout").on( "click", function(event) {
     document.getElementById('logout-form').submit();
 });
 
+$('.colorpicker').colorpicker();
+
 //Table
 $('.js-table').each(function (key, index) {
     var $this = $(this),
