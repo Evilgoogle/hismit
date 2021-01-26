@@ -1,5 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Request;
+use App\EmotionsGroup\Language\LangDb;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 Route::group(['middleware' => 'web'], function () {
     Auth::routes();
 
@@ -104,7 +109,7 @@ Route::group(['middleware' => 'web'], function () {
      * Этот код занимается установкой языка в свойства switch_lang класса LangDb
      * А также затрагивает роутинг с учетом языков
      */
-    $get_allLanguage = \App\EmotionsGroup\Language\LangDb::getInstance();
+    $get_allLanguage = LangDb::getInstance();
     $language = $get_allLanguage->get();
     // Устанавливаю в переключатель язык по умолчанию. Эта переменная пойдет в роутинг, если чел не переключил язык в ручную.
     // А если переключил, то она переопределяется на переключенный язык в коде ниже
