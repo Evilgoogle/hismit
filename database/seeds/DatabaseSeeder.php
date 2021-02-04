@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(NewConnectRelationshipsSeeder::class);
         $this->call(NewUsersTableSeeder::class);
         $this->call(SeosTableSeeder::class);
+        $this->call(LanguageTableSeeder::class);
     }
 }

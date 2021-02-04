@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Seo;
 
 class SeosTableSeeder extends Seeder
 {
@@ -11,7 +12,7 @@ class SeosTableSeeder extends Seeder
      */
     public function run()
     {
-        \App\Seo::create([
+        Seo::create([
             'url' => 'main',
             'page' => 'Главная'
         ]);

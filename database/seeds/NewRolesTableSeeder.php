@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Role;
 
 class NewRolesTableSeeder extends Seeder
 {
@@ -41,9 +42,9 @@ class NewRolesTableSeeder extends Seeder
          *
          */
         foreach ($RoleItems as $RoleItem) {
-            $newRoleItem = \App\Role::where('slug', '=', $RoleItem['slug'])->first();
+            $newRoleItem = Role::where('slug', '=', $RoleItem['slug'])->first();
             if ($newRoleItem === null) {
-                $newRoleItem = \App\Role::create([
+                Role::create([
                     'name'          => $RoleItem['name'],
                     'slug'          => $RoleItem['slug'],
                     'description'   => $RoleItem['description'],

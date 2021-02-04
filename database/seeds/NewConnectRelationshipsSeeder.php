@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Role;
 
 class NewConnectRelationshipsSeeder extends Seeder
 {
@@ -19,7 +20,7 @@ class NewConnectRelationshipsSeeder extends Seeder
         /**
          * Attach Permissions to Roles.
          */
-        $roleAdmin = \App\Role::where('slug', '=', 'admin')->first();
+        $roleAdmin = Role::where('slug', '=', 'admin')->first();
         foreach ($permissions as $permission) {
             $roleAdmin->attachPermission($permission);
         }

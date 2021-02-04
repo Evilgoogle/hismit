@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Role;
+use App\User;
 
 class NewUsersTableSeeder extends Seeder
 {
@@ -11,15 +13,15 @@ class NewUsersTableSeeder extends Seeder
      */
     public function run()
     {
-//        $userRole = \App\Role::where('slug', '=', 'user')->first();
-        $adminRole = \App\Role::where('slug', '=', 'admin')->first();
+//        $userRole = Role::where('slug', '=', 'user')->first();
+        $adminRole = Role::where('slug', '=', 'admin')->first();
         $permissions = config('roles.models.permission')::all();
 
         /*
          * Add Users
          *
          */
-        if (\App\User::where('email', '=', 'admin@default.loc')->first() === null) {
+        if (User::where('email', '=', 'admin@default.loc')->first() === null) {
             $newUser = config('roles.models.defaultUser')::create([
                 'name'     => 'Admin',
                 'email'    => 'admin@default.loc',
@@ -32,7 +34,7 @@ class NewUsersTableSeeder extends Seeder
             }
         }
 
-/*        if (\App\User::where('email', '=', 'irolik90@gmail.com')->first() === null) {
+/*        if (User::where('email', '=', 'irolik90@gmail.com')->first() === null) {
             $newUser = config('roles.models.defaultUser')::create([
                 'name'     => 'User',
                 'email'    => 'irolik90@gmail.com',
