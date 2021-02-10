@@ -7,7 +7,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <div class="form-line">
-                            <textarea class="form-control text-editor-eurotransit" name="data[][{{$value->url}}]">
+                            <textarea class="form-control text-editor-eurotransit" name="data[set_lang][{{$value->url}}]">
                                 <?php if(!empty($item)) {
                                     foreach((array)json_decode($item->data) as $array) {
                                         foreach ($array as $lang=>$i) {

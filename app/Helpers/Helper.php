@@ -43,7 +43,7 @@ if(!function_exists('lang_filter')) {
         if($json) {
             $lang = \App\EmotionsGroup\Language\LangDb::getInstance();
             $lang->get();
-            $item = (array)$item[''];
+            $item = (array)$item['set_lang'];
 
             //Тут делается isset на тот случай - в $item иногда может не быть языка установленного по умолчанию в $lang->default_lang. Такое может получится если добавили записи в базу и потом добавили новый язык. А этого нового языка нету в массиве запися.
             return isset($item[$lang->default_lang]) ? $item[$lang->default_lang] : '';
@@ -52,7 +52,7 @@ if(!function_exists('lang_filter')) {
                 $item = (array)json_decode($item);
                 $lang = \App\EmotionsGroup\Language\LangDb::getInstance();
                 $lang->get();
-                $item = (array)$item[''];
+                $item = (array)$item['set_lang'];
 
                 //Тут делается isset на тот случай - в $item иногда может не быть языка установленного по умолчанию в $lang->default_lang. Такое может получится если добавили записи в базу и потом добавили новый язык. А этого нового языка нету в массиве запися.
                 return isset($item[$lang->default_lang]) ? $item[$lang->default_lang] : '';
@@ -142,9 +142,9 @@ if (!function_exists('svgBlade')) {
                 "verify_peer" => false,
                 "verify_peer_name" => false,
             ],
-        ]; 
+        ];
 		$sw = file_get_contents($path, false, stream_context_create($arrContextOptions));
-		
+
         $svg = new \SimpleXMLElement($sw);
         $svg->addAttribute("class", $class);
         $output = $svg->asXML();
@@ -202,7 +202,7 @@ if (!function_exists('url_slug')) {
 
         // Make custom replacements
         $str = preg_replace(array_keys($options['replacements']), $options['replacements'], $str);
-        
+
         $str = str_replace(array_keys($char_map), $char_map, $str);
 
         // Replace non-alphanumeric characters with our delimiter

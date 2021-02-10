@@ -10,7 +10,7 @@
                             <input
                                     class="form-control"
                                     type="text"
-                                    name="data[][{{$value->url}}]"
+                                    name="data[set_lang][{{$value->url}}]"
                                     value="<?php if(!empty($item)) {
                                         foreach((array)json_decode($item->data) as $array) {
                                             foreach ($array as $lang=>$i) {

@@ -18,7 +18,7 @@ class Validator
         $lang_data = [];
         foreach ($request as $key=>$array) {
             if(is_array($array)) {
-                if(array_key_exists('',$array)) {
+                if(array_key_exists('set_lang',$array)) {
                     foreach ($array as $item) {
                         $lang_data[$key] = $item;
                         unset($request[$key]);
