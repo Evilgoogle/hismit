@@ -154,13 +154,13 @@ if (!function_exists('svgBlade')) {
 }
 
 if (!function_exists('getArrayFromJsonCollection')) {
-    function getArrayFromJsonCollection ($items, $requiredField) {
+    function getArrayFromJsonCollection ($items, $field_in, $field_out) {
         foreach ($items as $item) {
             $array[] = $item;
         }
 
         foreach ($array as $key => $value) {
-            $value[$requiredField] = langFilter($value['title']);
+            $value[$field_in] = lang_filter($value[$field_out]);
         }
         return $array;
     }
