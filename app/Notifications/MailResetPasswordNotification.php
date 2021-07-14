@@ -46,13 +46,14 @@ class MailResetPasswordNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $link = url("/password/reset/?token=" . $this->token);
+        $link = url("/password/reset/" . $this->token);
 
         return (new MailMessage)
+            ->from(env('MAIL_USERNAME'), env('APP_NAME'))
             ->subject("Сброс пароля")
-            ->line('Хей! Это ты забыл свой пароль? Тогда нажми на кнопку, чтобы восстановить его.')
-            ->action('Сбросить пароль', url('password/reset', $link))
-            ->line('Если это не ты, то просто проигнорируй его');
+            ->line('Если это Вы забыли пароль, тогда нажмите на кнопку, чтобы восстановить его.')
+            ->action('Сбросить пароль', $link)
+            ->line('Если это не Вы, то просто проигнорируйте его');
     }
 
     /**
