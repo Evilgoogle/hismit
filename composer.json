@@ -16,7 +16,8 @@
         "jeremykenedy/laravel-roles": "^2.5",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^2.0"
+        "laravel/ui": "^2.0",
+        "willvincent/feeds": "2.2.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

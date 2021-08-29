@@ -77,22 +77,20 @@ Route::group(['middleware' => 'web'], function () {
             Route::post('change-position', 'LangInterfaceController@changePosition');
         });
 
-        Route::group(['prefix' => 'block'], function () {
-            Route::get('', 'BlockController@index');
-            Route::get('add', 'BlockController@add');
-            Route::get('edit/{id}', 'BlockController@edit');
-            Route::post('insert/{id?}', 'BlockController@insert');
-            Route::get('remove/{id}', 'BlockController@remove');
-            Route::post('enable', 'BlockController@enable');
-        });
-
         Route::group(['prefix' => 'news'], function () {
             Route::get('', 'NewsController@index');
             Route::get('add', 'NewsController@add');
             Route::get('edit/{id}', 'NewsController@edit');
             Route::post('insert/{id?}', 'NewsController@insert');
             Route::get('remove/{id}', 'NewsController@remove');
-            Route::post('remove-image', 'NewsController@removeImage');
+        });
+
+        Route::group(['prefix' => 'logs'], function () {
+            Route::get('', 'LogsController@index');
+            Route::get('add', 'LogsController@add');
+            Route::get('edit/{id}', 'LogsController@edit');
+            Route::post('insert/{id?}', 'LogsController@insert');
+            Route::get('remove/{id}', 'LogsController@remove');
         });
 
         Route::group(['prefix' => 'request-call'], function () {
@@ -144,6 +142,5 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::group(['prefix' => $routing], function () {
         Route::get('', 'IndexController@index');
-//        Route::get('news/{url?}', 'IndexController@news')->name('news.show');
     });
 });

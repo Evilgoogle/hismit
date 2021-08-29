@@ -47,23 +47,17 @@
                 <span>Конфиг</span>
             </a>
         </li>
-        {{--<li>
-            <a href="/admin/request-call">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>Заявки</span>
-            </a>
-        </li>--}}
-        {{--<li>
-            <a href="/admin/block">
-                <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                <span>Текста</span>
-            </a>
-        </li>--}}
-        {{--<li>
+        <li>
             <a href="/admin/news">
-                <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                <i class="material-icons">content_copy</i>
                 <span>Новости</span>
             </a>
-        </li>--}}
+        </li>
+        <li>
+            <a href="/admin/logs">
+                <i class="material-icons">date_range</i>
+                <span>Логи</span>
+            </a>
+        </li>
     </ul>
 </div>

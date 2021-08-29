@@ -1,1 +1,435 @@
-!function(e){var t={};function a(n){if(t[n])return t[n].exports;var o=t[n]={i:n,l:!1,exports:{}};return e[n].call(o.exports,o,o.exports,a),o.l=!0,o.exports}a.m=e,a.c=t,a.d=function(e,t,n){a.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n})},a.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},a.t=function(e,t){if(1&t&&(e=a(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(a.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var o in e)a.d(n,o,function(t){return e[t]}.bind(null,o));return n},a.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return a.d(t,"a",t),t},a.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},a.p="/",a(a.s=1)}({1:function(e,t,a){e.exports=a("v0lo")},v0lo:function(e,t){function a(){$(".text-editor").each((function(e,t){$(this).prop("id","ckedit"+e+"x"),CKEDITOR.replace("ckedit"+e+"x")})),$(".text-editor-simple").each((function(e,t){$(this).prop("id","ckedit-simple"+e+"x"),CKEDITOR.replace("ckedit-simple"+e+"x",{customConfig:"/adminbsb/ckeditor/config-simple.js"})})),$(".text-editor-table").each((function(e,t){$(this).prop("id","ckedit-table"+e+"x"),CKEDITOR.replace("ckedit-table"+e+"x",{customConfig:"/adminbsb/ckeditor/config-table.js"})})),$(".text-editor-content").each((function(e,t){$(this).prop("id","ckedit-content"+e+"x"),CKEDITOR.replace("ckedit-content"+e+"x",{customConfig:"/adminbsb/ckeditor/config-content.js"})}))}$(".button-logout").on("click",(function(e){e.preventDefault(),document.getElementById("logout-form").submit()})),$(".js-table").each((function(e,t){$this=$(this);var a="table_"+e;a=$(".js-table").DataTable({dom:"Bfrtip",pageLength:100,buttons:["copy","csv","excel","pdf","print"],destroy:!0}),void 0!==$this.data("order-column")&&void 0!==$this.data("order-type")&&a.order([$this.data("order-column")-1,$this.data("order-type")]).draw()})),a(),$(document).on("click",".enable",(function(){var e=$(this),t=e.data("id"),a=e.val(),n=$("#ajaxUrl").val();$.ajax({url:"/admin/"+n+"/enable",method:"POST",data:{id:t,check:a},headers:{"X-CSRF-Token":$('meta[name="csrf-token"]').attr("content")},dataType:"json",success:function(t){"ok"==t.status&&(console.log(t.message),e.val(t.value))}})})),$(document).on("click",".item-remove",(function(e){e.preventDefault();var t=$(this).closest("tr"),a=t.attr("item-id"),n=$("#ajaxUrl").val();$.ajax({url:"/admin/"+n+"/remove",method:"POST",data:{id:a},headers:{"X-CSRF-Token":$('meta[name="csrf-token"]').attr("content")},dataType:"json",success:function(e){"ok"==e.status&&(console.log(e.message),t.remove())}})})),$(document).on("change",'[name="is_category_check"]',(function(){var e=$('[name="is_category"]'),t=e.val(),n=e.data("id"),o=$("#ajaxUrl").val();$.ajax({url:"/admin/"+o+"/is-category",method:"POST",data:{id:n,check:t},headers:{"X-CSRF-Token":$('meta[name="csrf-token"]').attr("content")},success:function(n){t=1==t?0:1,e.val(t),$(".category-block").html(n),$("select").selectpicker("refresh"),0==t&&a()}})})),$(document).on("click","button.addParam",(function(){var e=$(this),t=e.data("param"),a=$("#ajaxUrl").val(),n="/admin/param/add-param";if(e.hasClass("changeParam"))n="/admin/"+a+"/"+e.data("action");$.ajax({url:n,method:"POST",data:{param:t},headers:{"X-CSRF-Token":$('meta[name="csrf-token"]').attr("content")},success:function(t){e.closest(".params").find(".params-items").append(t),$("select").selectpicker("refresh"),$("*").hasClass("params-items")&&$(".params-item.solution-item").each((function(e){var t=$(this);$("input.price",t).attr("name","items["+e+"][price]"),$("input.desc",t).attr("name","items["+e+"][desc]")}))}})})),$(document).on("click","button.removeButton",(function(){var e=(i=$(this)).closest(".params-item"),t=$("#ajaxUrl").val();if(i.hasClass("removeArrJson")){t="/admin/removeArrJson";var a=(i=$(this).closest(".thumbnail")).attr("id"),n=i.data("column"),o=i.data("model"),r=i.data("arr"),s=i.data("index");a&&n&&o&&r&&(s||(s=""),$.ajax({url:t,method:"POST",data:{id:a,column:n,model:o,arr:r,index:s},headers:{"X-CSRF-Token":$('meta[name="csrf-token"]').attr("content")},dataType:"json",success:function(e){"ok"==e.status&&(console.log(e.message),i.remove())}}))}else if(i.hasClass("removeImage")){a=(i=$(this).closest(".thumbnail")).attr("id"),n=i.data("column"),o=i.data("model");var i,c=i.data("remove");$.ajax({url:"/admin/"+t+"/remove-image",method:"POST",data:{id:a,column:n,model:o,remove:c},headers:{"X-CSRF-Token":$('meta[name="csrf-token"]').attr("content")},dataType:"json",success:function(e){"ok"==e.status&&(console.log(e.message),$("table").hasClass("images-table")&&(i=i.closest("tr")),i.remove())}})}else e.remove()}));$(".order-table tbody").sortable({helper:function(e,t){var a=t.children(),n=t.clone();return n.children().each((function(e){$(this).width(a.eq(e).width())})),n},stop:function(e,t){$("td.index",t.item.parent()).each((function(e){var t=e+1;$(this).html(t);var a=$(this).parent(".order-table tbody tr").attr("id"),n=$("#ajaxUrl").val();$(this).closest("table").hasClass("images-table")&&(n+="/image"),$.ajax({url:"/admin/"+n+"/change-position",method:"POST",data:{id:a,position:t},headers:{"X-CSRF-Token":$('meta[name="csrf-token"]').attr("content")},success:function(e){},error:function(e){console.log(e)}})}))}}),$(document).on("click","button.js_switch",(function(){var e=$(this);$(".js_switch").removeClass("active"),e.addClass("active"),$(".langActive_insert").removeClass("active_insert"),$(".js_lang_"+e.data("switch")).addClass("active_insert")})),$(document).on("click",".js_default_lang",(function(){var e=$(this),t=e.data("id"),a=$(".js_default_lang");$.ajax({url:"/admin/language/default_lang",method:"POST",data:{id:t},headers:{"X-CSRF-Token":$('meta[name="csrf-token"]').attr("content")},success:function(t){"ok"==t&&(a.removeClass("btn-primary"),a.addClass("btn-default"),e.removeClass("btn-default"),e.addClass("btn-primary"))}})}))}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./resources/assets/js/admin.js":
+/*!**************************************!*\
+  !*** ./resources/assets/js/admin.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(".button-logout").on("click", function (event) {
+  event.preventDefault();
+  document.getElementById('logout-form').submit();
+});
+$('.colorpicker').colorpicker(); //Table
+
+$('.js-table').each(function (key, index) {
+  var $this = $(this),
+      $table = 'table_' + key;
+  $table = $('.js-table').DataTable({
+    // dom: 'Bfrltip',
+    dom: 'Bfrtip',
+    pageLength: 100,
+    // bPaginate: false,
+    buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+    destroy: true
+  });
+
+  if (typeof $this.data('order-column') !== 'undefined' && typeof $this.data('order-type') !== 'undefined') {
+    $table.order([$this.data('order-column') - 1, $this.data('order-type')]).draw();
+  }
+});
+CKEditorLaunch(); // CKEDITOR редактор
+
+function CKEditorLaunch() {
+  $(".text-editor").each(function (key, index) {
+    var $this = $(this);
+    $this.prop("id", "ckedit" + key + "x");
+    CKEDITOR.replace("ckedit" + key + "x");
+  });
+  $(".text-editor-simple").each(function (key, index) {
+    var $this = $(this);
+    $this.prop("id", "ckedit-simple" + key + "x");
+    CKEDITOR.replace("ckedit-simple" + key + "x", {
+      customConfig: '/adminbsb/ckeditor/config-simple.js'
+    });
+  });
+  $(".text-editor-table").each(function (key, index) {
+    var $this = $(this);
+    $this.prop("id", "ckedit-table" + key + "x");
+    CKEDITOR.replace("ckedit-table" + key + "x", {
+      customConfig: '/adminbsb/ckeditor/config-table.js'
+    });
+  });
+  $(".text-editor-content").each(function (key, index) {
+    var $this = $(this);
+    $this.prop("id", "ckedit-content" + key + "x");
+    CKEDITOR.replace("ckedit-content" + key + "x", {
+      customConfig: '/adminbsb/ckeditor/config-content.js'
+    });
+  });
+} // включить/выключить
+
+
+$(document).on('click', '.enable', function () {
+  var $this = $(this),
+      id = $this.data('id'),
+      check = $this.val(),
+      ajaxUrl = $('#ajaxUrl').val();
+  $.ajax({
+    url: '/admin/' + ajaxUrl + '/enable',
+    method: 'POST',
+    data: {
+      id: id,
+      check: check
+    },
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    },
+    dataType: 'json',
+    success: function success(result) {
+      if (result.status == 'ok') {
+        console.log(result.message);
+        $this.val(result.value);
+      }
+    }
+  });
+}); // удалить запись
+
+$(document).on('click', '.item-remove', function (e) {
+  e.preventDefault();
+  var $this = $(this).closest('tr'),
+      id = $this.attr('item-id'),
+      ajaxUrl = $('#ajaxUrl').val();
+  $.ajax({
+    url: '/admin/' + ajaxUrl + '/remove',
+    method: 'POST',
+    data: {
+      id: id
+    },
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    },
+    dataType: 'json',
+    success: function success(result) {
+      if (result.status == 'ok') {
+        console.log(result.message);
+        $this.remove();
+      }
+    }
+  });
+});
+$(document).on('change', '[name="is_category_check"]', function () {
+  var $new_this = $('[name="is_category"]'),
+      check = $new_this.val(),
+      id = $new_this.data('id'),
+      ajaxUrl = $('#ajaxUrl').val();
+  $.ajax({
+    url: '/admin/' + ajaxUrl + '/is-category',
+    method: 'POST',
+    data: {
+      id: id,
+      check: check
+    },
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    },
+    success: function success(result) {
+      if (check == 1) check = 0;else check = 1;
+      $new_this.val(check);
+      $('.category-block').html(result);
+      $('select').selectpicker('refresh');
+      if (check == 0) CKEditorLaunch();
+    }
+  });
+}); // добавление параметра
+
+$(document).on('click', 'button.addParam', function () {
+  var $this = $(this),
+      param = $this.data('param'),
+      ajaxUrl = $('#ajaxUrl').val(),
+      url = '/admin/param/add-param';
+  if ($this.hasClass('changeParam')) var action = $this.data('action'),
+      url = '/admin/' + ajaxUrl + '/' + action;
+  $.ajax({
+    url: url,
+    method: "POST",
+    data: {
+      param: param
+    },
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    },
+    success: function success($block) {
+      $this.closest('.params').find('.params-items').append($block);
+      $('select').selectpicker('refresh');
+
+      if ($('*').hasClass('params-items')) {
+        $(".params-item.solution-item").each(function (index) {
+          var $this = $(this);
+          $("input.price", $this).attr("name", "items[" + index + "][price]");
+          $("input.desc", $this).attr("name", "items[" + index + "][desc]");
+        });
+      }
+    }
+  });
+}); // удаление параметра
+
+$(document).on('click', 'button.removeButton', function () {
+  var $this = $(this),
+      $rm = $this.closest('.params-item'),
+      url = $('#ajaxUrl').val();
+
+  if ($this.hasClass('removeArrJson')) {
+    var $this = $(this).closest('.thumbnail'),
+        url = '/admin/removeArrJson',
+        id = $this.attr('id'),
+        column = $this.data('column'),
+        model = $this.data('model'),
+        arr = $this.data('arr'),
+        index = $this.data('index');
+
+    if (id && column && model && arr) {
+      if (!index) index = '';
+      $.ajax({
+        url: url,
+        method: 'POST',
+        data: {
+          id: id,
+          column: column,
+          model: model,
+          arr: arr,
+          index: index
+        },
+        headers: {
+          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: 'json',
+        success: function success(result) {
+          if (result.status == 'ok') {
+            console.log(result.message);
+            $this.remove();
+          }
+        }
+      });
+    }
+  } else if ($this.hasClass('removeImage')) {
+    var $this = $(this).closest('.thumbnail'),
+        id = $this.attr('id'),
+        column = $this.data('column'),
+        model = $this.data('model'),
+        remove = $this.data('remove');
+    $.ajax({
+      url: '/admin/' + url + '/remove-image',
+      method: 'POST',
+      data: {
+        id: id,
+        column: column,
+        model: model,
+        remove: remove
+      },
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
+      dataType: 'json',
+      success: function success(result) {
+        if (result.status == 'ok') {
+          console.log(result.message);
+
+          if ($('table').hasClass('images-table')) {
+            $this = $this.closest('tr');
+          }
+
+          $this.remove();
+        }
+      }
+    });
+  } else {
+    // if(id && item_id){
+    //     $.ajax({
+    //         url: '/admin/param/remove-param',
+    //         method: 'POST',
+    //         data: {},
+    //         headers: {
+    //             'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    //         },
+    //         dataType: 'json',
+    //         success: function(result){
+    //             if (result.status == 'ok') {
+    //                 console.log(result.message);
+    //                 $rm.remove();
+    //             }
+    //         }
+    //     });
+    // } else {
+    $rm.remove(); // }
+  }
+}); // Сортировка
+
+var fixHelperModified = function fixHelperModified(e, tr) {
+  var $originals = tr.children();
+  var $helper = tr.clone();
+  $helper.children().each(function (index) {
+    $(this).width($originals.eq(index).width());
+  });
+  return $helper;
+};
+
+var updateIndex = function updateIndex(e, ui) {
+  $('td.index', ui.item.parent()).each(function (i) {
+    var position = i + 1;
+    $(this).html(position);
+    var id = $(this).parent('.order-table tbody tr').attr('id'),
+        ajaxUrl = $('#ajaxUrl').val();
+    if ($(this).closest('table').hasClass('images-table')) ajaxUrl = ajaxUrl + '/image';
+    $.ajax({
+      url: '/admin/' + ajaxUrl + '/change-position',
+      method: 'POST',
+      data: {
+        id: id,
+        position: position
+      },
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function success(res) {},
+      error: function error(msg) {
+        console.log(msg);
+      }
+    });
+  });
+};
+
+$(".order-table tbody").sortable({
+  helper: fixHelperModified,
+  stop: updateIndex
+});
+/* Language switch */
+
+$(document).on('click', 'button.js_switch', function () {
+  var $this = $(this); //active lang
+
+  $('.js_switch').removeClass('active');
+  $this.addClass('active'); //reset input
+
+  $('.langActive_insert').removeClass('active_insert'); //set input
+
+  $('.js_lang_' + $this.data('switch')).addClass('active_insert');
+});
+/* Установка языка по умолчанию */
+
+$(document).on('click', '.js_default_lang', function () {
+  var $this = $(this),
+      id = $this.data('id'),
+      default_lang = $('.js_default_lang');
+  $.ajax({
+    url: '/admin/language/default_lang',
+    method: 'POST',
+    data: {
+      id: id
+    },
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    },
+    success: function success(result) {
+      if (result == 'ok') {
+        default_lang.removeClass('btn-primary');
+        default_lang.addClass('btn-default');
+        $this.removeClass('btn-default');
+        $this.addClass('btn-primary');
+      }
+    }
+  });
+});
+
+/***/ }),
+
+/***/ 1:
+/*!********************************************!*\
+  !*** multi ./resources/assets/js/admin.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! D:\Games\OSPanel_2\domains\w-test1.local\resources\assets\js\admin.js */"./resources/assets/js/admin.js");
+
+
+/***/ })
+
+/******/ });

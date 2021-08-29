@@ -15,8 +15,9 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Заголовок</th>
-                        <th>Дата публикации</th>
+                        <th>Дата</th>
+                        <th>Метод</th>
+                        <th>Код</th>
                         <th>Опции</th>
                     </tr>
                     </thead>
@@ -24,8 +25,9 @@
                     @foreach ($items as $item)
                         <tr id="{{ $item->id }}">
                             <td>{{ $item->id }}</td>
-                            <td>{{ $item->title }}</td>
                             <td>{{ $item->pubDate }}</td>
+                            <td>{{ $item->method }}</td>
+                            <td>{{ $item->http_code }}</td>
                             <td>
                                 <a href="/admin/{{ $info->url }}/edit/{{ $item->id }}">Изменить</a>
                                 <a href="/admin/{{ $info->url }}/remove/{{ $item->id }}">Удалить</a>

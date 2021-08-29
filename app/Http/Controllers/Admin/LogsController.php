@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\CrudClass;
-use App\News;
-use App\NewsMedia;
+use App\NewsLog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
 
-class NewsController extends Controller
+class LogsController extends Controller
 {
     protected $crudClass;
     protected $info;
@@ -18,25 +16,25 @@ class NewsController extends Controller
     {
         $this->crudClass = new CrudClass();
         $this->info = (object)[];
-        $this->info->head = 'Новости';
-        $this->info->url = 'news';
-        $this->info->modelName = 'News';
+        $this->info->head = 'Логи';
+        $this->info->url = 'logs';
+        $this->info->modelName = 'NewsLog';
         $this->middleware('role:admin');
     }
 
     public function index()
     {
-        $items = News::orderBy('pubDate', 'desc')->get();
+        $items = NewsLog::orderBy('pubDate', 'desc')->get();
         $info = $this->info;
 
-        return view('admin.news.index', compact('items', 'info'));
+        return view('admin.logs.index', compact('items', 'info'));
     }
 
     public function add()
     {
         $info = $this->info;
 
-        return view('admin.news.insert', compact('info'));
+        return view('admin.logs.insert', compact('info'));
     }
 
     public function edit($id)
@@ -44,13 +42,12 @@ class NewsController extends Controller
         $info = $this->info;
 
         try {
-            $item = News::findOrFail($id);
-            $files = NewsMedia::where('item_id', $item->id)->get();
+            $item = NewsLog::findOrFail($id);
         } catch (\Exception $e) {
             return back()->withErrors($e->getMessage());
         }
 
-        return view('admin.news.insert', compact('item', 'files', 'info'));
+        return view('admin.logs.insert', compact('item', 'info'));
     }
 
     public function remove($id)
@@ -62,15 +59,6 @@ class NewsController extends Controller
 
     public function insert(Request $request, $id = null)
     {
-        $rules = [
-            'title' => 'required',
-            'desc' => 'required',
-        ];
-
-        $v = Validator::make($request->all(), $rules);
-
-        if ($v->fails()) return back()->withErrors($v->errors())->withInput();
-
         $result = $this->crudClass->insert($this->info->modelName, $id ,$request, null, null, null, null, false);
 
         if ($result['status'] == 'ok')

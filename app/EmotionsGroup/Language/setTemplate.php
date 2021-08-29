@@ -47,7 +47,7 @@ class setTemplate
             $lang = LangDb::getInstance();
             $land_data = $lang->get();
 
-            foreach ($land_data as $value) { $url = $value->url ?>
+            foreach ($land_data as $value) { $url = $value->url;?>
                 <div class="langActive_insert <?php if($lang->default_lang == $value->url) {?> active_insert <?php }?> js_lang_<?php echo $value->url ?>">
                     <h2 class="card-inside-title"><?php echo $this->sets['label'] ?></h2>
                     <div class="row clearfix">
@@ -56,27 +56,27 @@ class setTemplate
                                 <div class="form-line">
 
                                     <!-- Проверка type. По переданному значению подключается нужный шаблон -->
-                                    <?php if(isset($this->sets['input_type'])) {
-                                        if($this->sets['input_type'] == 'input') {?>
+                                    <?php if(isset($this->sets['type'])) {
+                                        if($this->sets['type'] == 'input') {?>
 
                                             <input
                                                 class="form-control"
                                                 type="<?php echo isset($this->sets['type']) ? $this->sets['type'] : 'text' ?>"
-                                                name="<?php echo $this->sets['name'].'[set_lang]['.$value->url.']' ?>"
+                                                name="<?php echo $this->sets['name'].'[lang]['.$value->url.']' ?>"
                                                 placeholder="<?php echo $this->sets['label'] ?>"
-                                                value="<?php echo isset($this->item->set_lang->$url) ? htmlspecialchars($this->item->set_lang->$url) : '' ?>"
+                                                value="<?php echo isset($this->item->lang->$url) ? htmlspecialchars($this->item->lang->$url) : '' ?>"
                                                 <?php if($lang->default_lang == $value->url) { echo $this->required; } ?>>
 
-                                        <?php } elseif ($this->sets['input_type'] == 'textarea') {?>
+                                        <?php } elseif ($this->sets['type'] == 'textarea') {?>
 
                                             <textarea
                                                 class="form-control <?php echo isset($this->sets['editor']) && $this->sets['editor'] ? 'text-editor' : '' ?><?php echo isset($this->sets['editor_type']) && $this->sets['editor_type'] ? '-'.$this->sets['editor_type'] : '' ?>"
-                                                name="<?php echo $this->sets['name'].'[set_lang]['.$value->url.']'?>"
+                                                name="<?php echo $this->sets['name'].'[lang]['.$value->url.']'?>"
                                                 placeholder="<?php echo $this->sets['label'] ?>"
                                                 <?php if (isset($this->sets['editor']) && $this->sets['editor']) {
                                                     echo isset($this->sets['name']) ? $this->sets['name'] : '';
                                                 }?>
-                                            ><?php echo isset($this->item->set_lang->$url) ? $this->item->set_lang->$url : '' ?></textarea>
+                                            ><?php echo isset($this->item->lang->$url) ? $this->item->lang->$url : '' ?></textarea>
 
                                         <?php }
                                     } ?>

@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateNewsTable extends Migration
+class TableNews extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +14,12 @@ class CreateNewsTable extends Migration
     public function up()
     {
         Schema::create('news', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->text('title')->nullable();
+            $table->id();
+            $table->string('title')->nullable();
+            $table->string('url')->nullable();
             $table->text('desc')->nullable();
-            $table->string('image')->nullable();
-            $table->date('publish')->nullable();
-            $table->text('url')->nullable();
+            $table->string('author')->nullable();
+            $table->dateTime('pubDate')->nullable();
             $table->timestamps();
         });
     }

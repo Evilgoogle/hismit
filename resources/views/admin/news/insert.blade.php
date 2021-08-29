@@ -29,21 +29,21 @@
                         'editor_type' => 'simple'
                     ])
 
-                    @include('admin._input.input-file', [
-                        'name' => 'image',
-                        'label' => 'Превью',
-                        'item' => isset($item) ? $item : '',
-                        'modelName' => 'News',
-                        'is_image' => true
-                    ])
-
-                    @include('admin._input.input-text', [
-                        'name' => 'publish',
-                        'label' => 'Дата публикации',
-                        'item' => isset($item) ? $item : '',
-                        'type' => 'date',
-                        'required' => true
-                    ])
+                    @if(isset($files))
+                    <div class="files">
+                        @foreach($files as $file)
+                            <div class="item">
+                                <div class="box">
+                                    @if($file->type == 'image/jpeg' || $file->type == 'image/png')
+                                        <a href="{{ $file->file }}" target="_blank"><img src="{{ $file->file }}" alt="file_{{ $file->id }}"></a>
+                                    @elseif($file->type == 'video/mp4')
+                                        <a href="{{ $file->file }}" target="_blank"><span>Смотреть Видео</span></a>
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    @endif
 
                     <div class="row clearfix">
                         <div class="col-sm-12">
